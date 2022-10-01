@@ -1,0 +1,74 @@
+[
+    {
+        "type_of": "article",
+        "id": 1203386,
+        "title": "What I Learned From Doing The 100 Days of Code Challenge",
+        "description": "Introduction  Lessons Learned   Create A Schedule You Don't Need To Spend A Fortune To Learn Learn...",
+        "published": true,
+        "published_at": "2022-09-26T12:21:52.632Z",
+        "slug": "what-i-learned-from-doing-the-100-days-of-code-challenge-4md4",
+        "path": "/dev_neil_a/what-i-learned-from-doing-the-100-days-of-code-challenge-4md4",
+        "url": "https://dev.to/dev_neil_a/what-i-learned-from-doing-the-100-days-of-code-challenge-4md4",
+        "comments_count": 0,
+        "public_reactions_count": 0,
+        "page_views_count": 42,
+        "published_timestamp": "2022-09-26T12:21:52Z",
+        "body_markdown": "Removed as it's the body of the article",
+        "positive_reactions_count": 0,
+        "cover_image": "https://res.cloudinary.com/practicaldev/image/fetch/s--VgUXsbyq--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/67g2ekfytyhxsrliuynj.jpeg",
+        "tag_list": [
+            "100daysofcode",
+            "python",
+            "javascript",
+            "codenewbie"
+        ],
+        "canonical_url": "https://dev.to/dev_neil_a/what-i-learned-from-doing-the-100-days-of-code-challenge-4md4",
+        "reading_time_minutes": 7,
+        "user": {
+            "name": "dev_neil_a",
+            "username": "dev_neil_a",
+            "twitter_username": "dev_neil_a",
+            "github_username": "York13Pud",
+            "user_id": 857210,
+            "website_url": "https://www.linkedin.com/in/neil-allwood/",
+            "profile_image": "https://res.cloudinary.com/practicaldev/image/fetch/s---Y4hmlhp--/c_fill,f_auto,fl_progressive,h_640,q_auto,w_640/https://dev-to-uploads.s3.amazonaws.com/uploads/user/profile_image/857210/26770d9b-d135-46f0-9439-0ec70428ec63.png",
+            "profile_image_90": "https://res.cloudinary.com/practicaldev/image/fetch/s--SZy6y74T--/c_fill,f_auto,fl_progressive,h_90,q_auto,w_90/https://dev-to-uploads.s3.amazonaws.com/uploads/user/profile_image/857210/26770d9b-d135-46f0-9439-0ec70428ec63.png"
+        }
+    },
+    {
+        "type_of": "article",
+        "id": 1197626,
+        "title": "Creating a Windows 11 Virtual Machine with VMware Fusion on Intel-Based Mac",
+        "description": "Introduction Prerequisites  Creating the Virtual Machine   Step 1. Create a custom Windows 10...",
+        "published": true,
+        "published_at": "2022-09-19T19:14:20.841Z",
+        "slug": "creating-a-windows-11-virtual-machine-with-vmware-fusion-on-intel-based-mac-17d6",
+        "path": "/dev_neil_a/creating-a-windows-11-virtual-machine-with-vmware-fusion-on-intel-based-mac-17d6",
+        "url": "https://dev.to/dev_neil_a/creating-a-windows-11-virtual-machine-with-vmware-fusion-on-intel-based-mac-17d6",
+        "comments_count": 0,
+        "public_reactions_count": 0,
+        "page_views_count": 29,
+        "published_timestamp": "2022-09-19T19:14:20Z",
+        "body_markdown": "Removed as it's the body of the article",
+        "positive_reactions_count": 0,
+        "cover_image": "https://res.cloudinary.com/practicaldev/image/fetch/s--ZKMb6983--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/0d8rzba0573fsu8bb0fa.jpg",
+        "tag_list": [
+            "datascience",
+            "macos",
+            "webdev",
+            "tutorial"
+        ],
+        "canonical_url": "https://dev.to/dev_neil_a/creating-a-windows-11-virtual-machine-with-vmware-fusion-on-intel-based-mac-17d6",
+        "reading_time_minutes": 6,
+        "user": {
+            "name": "dev_neil_a",
+            "username": "dev_neil_a",
+            "twitter_username": "dev_neil_a",
+            "github_username": "York13Pud",
+            "user_id": 857210,
+            "website_url": "https://www.linkedin.com/in/neil-allwood/",
+            "profile_image": "https://res.cloudinary.com/practicaldev/image/fetch/s---Y4hmlhp--/c_fill,f_auto,fl_progressive,h_640,q_auto,w_640/https://dev-to-uploads.s3.amazonaws.com/uploads/user/profile_image/857210/26770d9b-d135-46f0-9439-0ec70428ec63.png",
+            "profile_image_90": "https://res.cloudinary.com/practicaldev/image/fetch/s--SZy6y74T--/c_fill,f_auto,fl_progressive,h_90,q_auto,w_90/https://dev-to-uploads.s3.amazonaws.com/uploads/user/profile_image/857210/26770d9b-d135-46f0-9439-0ec70428ec63.png"
+        }
+    }
+]
