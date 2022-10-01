@@ -1,13 +1,18 @@
-![Header](/assets/images/header/header.png)
+# Dev.to Article Statistics Monitoring
 
-Description of the repo and what it contains
+## Introduction
+
+The goal of this project is to gather all of the articles from your account and allow you to see the changes in the stats per article in one place, rather than by checking each individual article.
+
+The items it tracks include:
+
+* The number of likes per post
+  * Changes per hour for each post
+* The number of comments per post
+  * Changes per hour for each post
+
+Each article will be polled hourly to give a granular hourly change tracking although it can show the totals by day, week, month and year.
 
 ## Instructions
 
-The instructions for the/each program is contained in the README.md file in the/each program(s) folder.
-
-## Link to Porgram(s)
-
-* [application](/application/ "application") - Brief description of the contents of the application folder.
-* [application](/application/ "application") - Brief description of the contents of the application folder.
-* [application](/application/ "application") - Brief description of the contents of the application folder.
+To be added later.
