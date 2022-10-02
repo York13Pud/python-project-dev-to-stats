@@ -21,9 +21,10 @@ response = requests.get(url = URL,
                         headers = headers)
 
 
-# --- Convert the response to a pandas dataframe and drop unused columns:
+# --- Convert the response to a pandas dataframe, drop unused columns and convert published_at to datetime:
 df = pd.json_normalize(response.json())
-df.drop(["description", 
+df.drop(["type_of",
+         "description", 
          "slug",
          "path",
          "body_markdown",
@@ -43,7 +44,10 @@ df.drop(["description",
         axis = 1,
         inplace = True)
 
+print(df.head(n = 3))
+
+df["published_timestamp"] = pd.to_datetime(df["published_timestamp"], utc = False)
 
 # --- Show the dataframes contents:
-print(df)
 print(df.dtypes)
+print(df.head(n = 3))
