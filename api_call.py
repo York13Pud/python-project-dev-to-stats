@@ -15,18 +15,11 @@ def api_call(api_key_name:str, api_key_secret:str):
         response (Class): Returns the payload of the request in a JSON format.
     """
     
-    log_file = "logs/api-call-log.log"
-    
-    logging.basicConfig(filename = log_file, 
-                        encoding = "utf-8", 
-                        level = logging.INFO,
-                        format='%(levelname)s:%(asctime)s:%(message)s')
-    
     headers = {api_key_name: api_key_secret}
 
     params = {"per_page": 15}
 
-    URL = "https://dev.to/api/articles/me/publishe"
+    URL = "https://dev.to/api/articles/me/published"
 
 
     # --- Execute an API GET request to the API:
@@ -39,15 +32,5 @@ def api_call(api_key_name:str, api_key_secret:str):
         return response
     
     else:
-        logging.error(msg = f"{response.status_code} {response.reason}")
-        msg = "Error. Please see log file"
+        logging.error(msg = f"{response.status_code} {URL} {response.reason}")
         return response
-    
-
-def create_dataframe():
-    # --- Convert the json response to a pandas dataframe:
-    df = convert_json_to_df(response=response)
-
-
-    # --- Show the dataframes contents:
-    print(df.head(n = 3))
