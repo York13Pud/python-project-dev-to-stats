@@ -12,14 +12,5 @@ api_key_secret = os.getenv("DEVTO")
 response = api_call(api_key_name =  API_KEY_NAME,
                     api_key_secret= api_key_secret)
 
-
+print(response.content)
 # --- TO DO: Check HTTP response code and if 200, goto convert JSON. Otherwise error.
-
-
-# --- Convert the json response to a pandas dataframe:
-df = convert_json_to_df(response=response)
-
-
-# --- Show the dataframes contents:
-print(df.head(n = 3))
-    
