@@ -33,7 +33,7 @@ def main():
 
         # --- Show the dataframes contents:
         print(df.head(n = 3))
-
+        print(df.dtypes)
     else:
         print(f"Error: {response.status_code}: {response.reason}")
     
