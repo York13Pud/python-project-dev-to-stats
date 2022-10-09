@@ -5,8 +5,12 @@ from api_call import api_call
 from convert_json import convert_json_to_df
 
 
+# --- Get the root folder path that the app is stored in:
+APP_FOLDER_PATH = os.path.dirname(__file__)
+
+
 # --- Setup the logging:
-log_file = "logs/app.log"
+log_file = f"{APP_FOLDER_PATH}/logs/app.log"
 
 logging.basicConfig(filename = log_file, 
                     encoding = "utf-8", 
@@ -14,7 +18,13 @@ logging.basicConfig(filename = log_file,
                     format='%(levelname)s:%(asctime)s:%(message)s')
 
 
+# --- The main application:
 def main():
+    """
+    _summary_
+        This is the main application starting point.
+    """
+    
     logging.info(msg = "===== Starting application =====")
     
     # --- Set the required constants and variables
@@ -34,12 +44,12 @@ def main():
         # --- Show the dataframes contents:
         print(df.head(n = 3))
         print(df.dtypes)
+        
     else:
         print(f"Error: {response.status_code}: {response.reason}")
     
     logging.info(msg = "===== Stopping application =====")
-    
-# --- TO DO: Check HTTP response code and if 200, goto convert JSON. Otherwise error.
+
 
 # --- Start the program if the name is "__main__":
 if __name__ == "__main__":
