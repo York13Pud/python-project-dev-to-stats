@@ -20,9 +20,10 @@ def api_call(api_key_name:str, api_key_secret:str):
     params = {"per_page": 15}
 
     URL = "https://dev.to/api/articles/me/published"
-
-
+    
     # --- Execute an API GET request to the API:
+    logging.info(msg = f"Running {__name__} function")
+    
     response = requests.get(url = URL, 
                             params = params, 
                             headers = headers)
