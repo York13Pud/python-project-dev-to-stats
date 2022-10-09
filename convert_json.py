@@ -1,5 +1,5 @@
 # --- Import the required libraries:
-from urllib import request
+import logging
 import pandas as pd
 
 
@@ -15,8 +15,12 @@ def convert_json_to_df(response:list):
         df (Dataframe): A pandas dataframe with all of the published articles for the account
     """
     
+    logging.info(msg = f"Running {__name__} function")
+    
+    logging.info(msg = f"Creating df Pandas Dataframe")    
     df = pd.json_normalize(response.json())
     
+    logging.info(msg = f"Dropping unused columns from df Dataframe")  
     df.drop(["type_of",
             "description", 
             "slug",
@@ -38,6 +42,7 @@ def convert_json_to_df(response:list):
             axis = 1,
             inplace = True)
 
+    logging.info(msg = f"Converting 'published_timestamp' to datetime64")  
     df["published_timestamp"] = pd.to_datetime(df["published_timestamp"], 
                                                utc = False)
     
