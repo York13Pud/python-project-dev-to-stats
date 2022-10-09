@@ -15,7 +15,7 @@ log_file = f"{APP_FOLDER_PATH}/logs/app.log"
 logging.basicConfig(filename = log_file, 
                     encoding = "utf-8", 
                     level = logging.INFO,
-                    format='%(levelname)s:%(asctime)s:%(message)s')
+                    format='%(levelname)s:%(asctime)s:%(name)s:%(message)s')
 
 
 # --- The main application:
