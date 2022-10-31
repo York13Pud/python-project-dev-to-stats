@@ -33,13 +33,13 @@ def main():
 
     # --- Make a call to the dev.io API for a users published articles:
     response = api_call(api_key_name =  API_KEY_NAME,
-                        api_key_secret= api_key_secret)
+                        api_key_secret = api_key_secret)
 
     # --- Check the status code of the response and action accordingly:
     if response.status_code == 200:
         
         # --- Convert the json response to a pandas dataframe:
-        df = convert_json_to_df(response=response)
+        df = convert_json_to_df(response = response)
 
         # --- Show the dataframes contents:
         print(df.head(n = 3))
