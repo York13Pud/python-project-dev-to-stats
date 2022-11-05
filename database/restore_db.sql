@@ -5,7 +5,7 @@
 -- Dumped from database version 14.5
 -- Dumped by pg_dump version 15.0
 
--- Started on 2022-11-05 16:06:28 GMT
+-- Started on 2022-11-05 16:14:16 GMT
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -31,6 +31,46 @@ ALTER SCHEMA public OWNER TO postgres;
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
+
+--
+-- TOC entry 212 (class 1259 OID 82040)
+-- Name: blog_source; Type: TABLE; Schema: public; Owner: neil
+--
+
+CREATE TABLE public.blog_source (
+    blog_source_id smallint NOT NULL,
+    blog_source_name text NOT NULL,
+    blog_source_url text NOT NULL,
+    blog_source_date_added date DEFAULT now() NOT NULL
+);
+
+
+ALTER TABLE public.blog_source OWNER TO neil;
+
+--
+-- TOC entry 211 (class 1259 OID 82039)
+-- Name: blog_source_blog_source_id_seq; Type: SEQUENCE; Schema: public; Owner: neil
+--
+
+CREATE SEQUENCE public.blog_source_blog_source_id_seq
+    AS smallint
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.blog_source_blog_source_id_seq OWNER TO neil;
+
+--
+-- TOC entry 3594 (class 0 OID 0)
+-- Dependencies: 211
+-- Name: blog_source_blog_source_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: neil
+--
+
+ALTER SEQUENCE public.blog_source_blog_source_id_seq OWNED BY public.blog_source.blog_source_id;
+
 
 --
 -- TOC entry 210 (class 1259 OID 82029)
@@ -68,7 +108,7 @@ CREATE SEQUENCE public.user_user_id_seq
 ALTER TABLE public.user_user_id_seq OWNER TO neil;
 
 --
--- TOC entry 3583 (class 0 OID 0)
+-- TOC entry 3595 (class 0 OID 0)
 -- Dependencies: 209
 -- Name: user_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: neil
 --
@@ -77,7 +117,15 @@ ALTER SEQUENCE public.user_user_id_seq OWNED BY public."user".user_id;
 
 
 --
--- TOC entry 3431 (class 2604 OID 82032)
+-- TOC entry 3439 (class 2604 OID 82043)
+-- Name: blog_source blog_source_id; Type: DEFAULT; Schema: public; Owner: neil
+--
+
+ALTER TABLE ONLY public.blog_source ALTER COLUMN blog_source_id SET DEFAULT nextval('public.blog_source_blog_source_id_seq'::regclass);
+
+
+--
+-- TOC entry 3436 (class 2604 OID 82032)
 -- Name: user user_id; Type: DEFAULT; Schema: public; Owner: neil
 --
 
@@ -85,7 +133,17 @@ ALTER TABLE ONLY public."user" ALTER COLUMN user_id SET DEFAULT nextval('public.
 
 
 --
--- TOC entry 3576 (class 0 OID 82029)
+-- TOC entry 3587 (class 0 OID 82040)
+-- Dependencies: 212
+-- Data for Name: blog_source; Type: TABLE DATA; Schema: public; Owner: neil
+--
+
+COPY public.blog_source (blog_source_id, blog_source_name, blog_source_url, blog_source_date_added) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3585 (class 0 OID 82029)
 -- Dependencies: 210
 -- Data for Name: user; Type: TABLE DATA; Schema: public; Owner: neil
 --
@@ -95,7 +153,16 @@ COPY public."user" (user_id, user_email_adrs, user_first_name, user_last_name, u
 
 
 --
--- TOC entry 3584 (class 0 OID 0)
+-- TOC entry 3596 (class 0 OID 0)
+-- Dependencies: 211
+-- Name: blog_source_blog_source_id_seq; Type: SEQUENCE SET; Schema: public; Owner: neil
+--
+
+SELECT pg_catalog.setval('public.blog_source_blog_source_id_seq', 1, false);
+
+
+--
+-- TOC entry 3597 (class 0 OID 0)
 -- Dependencies: 209
 -- Name: user_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: neil
 --
@@ -104,7 +171,16 @@ SELECT pg_catalog.setval('public.user_user_id_seq', 1, false);
 
 
 --
--- TOC entry 3435 (class 2606 OID 82038)
+-- TOC entry 3444 (class 2606 OID 82048)
+-- Name: blog_source blog_source_pkey; Type: CONSTRAINT; Schema: public; Owner: neil
+--
+
+ALTER TABLE ONLY public.blog_source
+    ADD CONSTRAINT blog_source_pkey PRIMARY KEY (blog_source_id);
+
+
+--
+-- TOC entry 3442 (class 2606 OID 82038)
 -- Name: user user_id; Type: CONSTRAINT; Schema: public; Owner: neil
 --
 
@@ -113,7 +189,7 @@ ALTER TABLE ONLY public."user"
 
 
 --
--- TOC entry 3582 (class 0 OID 0)
+-- TOC entry 3593 (class 0 OID 0)
 -- Dependencies: 4
 -- Name: SCHEMA public; Type: ACL; Schema: -; Owner: postgres
 --
@@ -122,7 +198,7 @@ REVOKE USAGE ON SCHEMA public FROM PUBLIC;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2022-11-05 16:06:28 GMT
+-- Completed on 2022-11-05 16:14:16 GMT
 
 --
 -- PostgreSQL database dump complete
