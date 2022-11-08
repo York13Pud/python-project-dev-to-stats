@@ -1,9 +1,11 @@
 # --- Import the required libraries and modules:
 import logging
 import os
+import pandas as pd
+from sqlalchemy import text, select
 from modules.api_call import api_call
 from modules.convert_json import convert_json_to_df
-
+from modules.database.connect_to_db import engine
 
 # --- Get the root folder path that the app is stored in:
 APP_FOLDER_PATH = os.path.dirname(__file__)
@@ -49,7 +51,12 @@ def main():
         print(f"Error: {response.status_code}: {response.reason}")
     
     logging.info(msg = "===== Stopping application =====")
-
+    
+    with engine.connect() as conn:
+        list_tags_df = pd.DataFrame(data=conn.execute(text("SELECT * FROM blog_tag")).all())
+        print(list_tags_df["blog_tag_date_added"])
+        print(list_tags_df)
+        list_tags_df.info()
 
 # --- Start the program if the name is "__main__":
 if __name__ == "__main__":
