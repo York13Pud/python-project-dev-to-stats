@@ -54,7 +54,7 @@ def main():
     
     with engine.connect() as conn:
         list_tags_df = pd.DataFrame(data=conn.execute(text("SELECT * FROM blog_tag")).all())
-        print(list_tags_df["blog_tag_date_added"])
+        list_tags_df["blog_tag_date_added"]
         print(list_tags_df)
         list_tags_df.info()
 
