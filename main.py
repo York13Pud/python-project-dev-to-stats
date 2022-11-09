@@ -7,6 +7,7 @@ from modules.api_call import api_call
 from modules.convert_json import convert_json_to_df
 from modules.database.connect_to_db import engine
 
+
 # --- Get the root folder path that the app is stored in:
 APP_FOLDER_PATH = os.path.dirname(__file__)
 
@@ -57,6 +58,7 @@ def main():
         list_tags_df["blog_tag_date_added"]
         print(list_tags_df)
         list_tags_df.info()
+
 
 # --- Start the program if the name is "__main__":
 if __name__ == "__main__":
