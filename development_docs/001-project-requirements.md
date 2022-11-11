@@ -34,3 +34,4 @@
 * HTML
 * CSS / BootStrap
 * JavaScript
+* d3.js
