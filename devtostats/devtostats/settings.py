@@ -16,13 +16,15 @@ import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-ENVIRONMENTS_DIR = "devtostats/envs"
-ENVIRONMENTS_FILE = ".env"
+PROJECT_DIR = "devtostats"
 
 
 # --- Initialise environ to read environment variables:
+ENVIRONMENTS_DIR = "envs"
+ENVIRONMENTS_FILE = ".env"
+
 env = environ.Env(DEBUG=(bool, False))
-environ.Env.read_env(Path(BASE_DIR, ENVIRONMENTS_DIR, ENVIRONMENTS_FILE))
+environ.Env.read_env(Path(BASE_DIR, PROJECT_DIR, ENVIRONMENTS_DIR, ENVIRONMENTS_FILE))
 
 
 # Quick-start development settings - unsuitable for production
@@ -132,3 +134,28 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# --- Logging settings:
+# LOG_DIR = "logs"
+# LOG_FILE = "debug.log"
+# LOG_LEVEL = env("LOG_LEVEL")
+
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'handlers': {
+#         'file': {
+#             'level': LOG_LEVEL,
+#             'class': 'logging.FileHandler',
+#             'filename': Path(BASE_DIR, PROJECT_DIR, LOG_DIR, LOG_FILE),
+#         },
+#     },
+#     'loggers': {
+#         'django': {
+#             'handlers': ['file'],
+#             'level': LOG_LEVEL,
+#             'propagate': True,
+#         },
+#     },
+# }
