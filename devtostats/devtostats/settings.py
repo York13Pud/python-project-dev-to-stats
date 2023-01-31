@@ -10,13 +10,13 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
-from pathlib import Path, PurePath
+from pathlib import Path
 
 import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-PROJECT_DIR = "devtostats"
+PROJECT_DIR = Path(BASE_DIR, "devtostats")
 
 
 # --- Initialise environ to read environment variables:
@@ -24,7 +24,7 @@ ENVIRONMENTS_DIR = "envs"
 ENVIRONMENTS_FILE = ".env"
 
 env = environ.Env(DEBUG=(bool, False))
-environ.Env.read_env(Path(BASE_DIR, PROJECT_DIR, ENVIRONMENTS_DIR, ENVIRONMENTS_FILE))
+environ.Env.read_env(Path(PROJECT_DIR, ENVIRONMENTS_DIR, ENVIRONMENTS_FILE))
 
 
 # Quick-start development settings - unsuitable for production
