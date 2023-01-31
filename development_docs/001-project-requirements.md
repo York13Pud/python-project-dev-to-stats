@@ -13,7 +13,7 @@
 ### Tools to use
 
 * Python and additional libraries
-* FastAPI or Flask (web and API framework)
+* Django for the web framework
 * PostgreSQL (database)
 * nginx (web server)
 
