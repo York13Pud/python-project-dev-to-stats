@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
-
+import logging
 import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -24,9 +24,6 @@ ENVIRONMENTS_FILE = ".env"
 
 env = environ.Env(DEBUG=(bool, False))
 environ.Env.read_env(Path(BASE_DIR, ENVIRONMENTS_DIR, ENVIRONMENTS_FILE))
-
-# print(Path(BASE_DIR, ENVIRONMENTS_DIR, ENVIRONMENTS_FILE))
-# print(env("MESSAGE"))
 
 
 # Quick-start development settings - unsuitable for production
@@ -87,12 +84,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 
 # Password validation
@@ -138,26 +135,37 @@ STATICFILES_DIRS = [Path(BASE_DIR, "static")]
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-# --- Logging settings:
-# LOG_DIR = "logs"
-# LOG_FILE = "debug.log"
-# LOG_LEVEL = env("LOG_LEVEL")
+#--- Logging settings:
+LOG_DIR = "logs"
+LOG_FILE = "debug.log"
+LOG_LEVEL = env("LOG_LEVEL")
 
-# LOGGING = {
-#     'version': 1,
-#     'disable_existing_loggers': False,
-#     'handlers': {
-#         'file': {
-#             'level': LOG_LEVEL,
-#             'class': 'logging.FileHandler',
-#             'filename': Path(BASE_DIR, PROJECT_DIR, LOG_DIR, LOG_FILE),
-#         },
-#     },
-#     'loggers': {
-#         'django': {
-#             'handlers': ['file'],
-#             'level': LOG_LEVEL,
-#             'propagate': True,
-#         },
-#     },
-# }
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'console': {
+            'format': '%(levelname)s:%(asctime)s:%(name)s:%(message)s'
+        },
+        'file': {
+            'format': '%(levelname)s:%(asctime)s:%(name)s:%(message)s'
+        }
+    },
+    'handlers': {
+        'file': {
+            'level': LOG_LEVEL,
+            'class': 'logging.FileHandler',
+            'formatter': 'file',
+            'filename': Path(BASE_DIR, LOG_DIR, LOG_FILE),
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': LOG_LEVEL,
+            'propagate': True,
+        },
+    },
+}
+
+# %(levelname)s:%(asctime)s:%(name)s:%(message)s
