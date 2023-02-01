@@ -1,1 +1,4 @@
 - Add site map with django-site-map
+- Add logging to each app
+
+- Use different .env files for different deployment scenarios
