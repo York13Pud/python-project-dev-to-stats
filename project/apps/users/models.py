@@ -20,8 +20,7 @@ class Profile(models.Model):
                                 on_delete = models.CASCADE,
                                 null = True,
                                 blank = True)
-    account_id = models.IntegerField(max_length = 10,
-                                     null = True,
+    account_id = models.IntegerField(null = True,
                                      blank = True)
     user_summary = models.CharField(max_length = 2000,
                                     null = True,
