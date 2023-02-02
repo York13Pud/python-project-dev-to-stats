@@ -7,6 +7,11 @@ import uuid
 # Create your models here.
 
 class Profile(models.Model):
+    """_summary_
+    This model is used to create a user profile of additional information gathered from dev.to.
+
+    It uses the auth_user table via a one-to-one relationship for the user in the application.
+    """
     id = models.UUIDField(primary_key = True,
                           default = uuid.uuid4,
                           unique = True,
@@ -39,3 +44,11 @@ class Profile(models.Model):
                                       default = "profiles/user-default.png")
     joined_on = models.DateTimeField(auto_now_add = False)
     date_added = models.DateTimeField(auto_now_add = True)
+    
+    def __str__(self):
+        """_summary_
+            This returns a string representation of the title in the admin panel for a row, rather than the object description.
+        Returns:
+            This returns a string representation of the title in the admin panel for a row, rather than the object description.
+        """
+        return str(self.username)
