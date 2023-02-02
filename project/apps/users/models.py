@@ -41,7 +41,7 @@ class Profile(models.Model):
     profile_image = models.ImageField(null = True, 
                                       blank = True,
                                       upload_to = "profiles/",
-                                      default = "profiles/user-default.png")
+                                      default = "profiles/default.png")
     joined_on = models.DateTimeField(auto_now_add = False)
     date_added = models.DateTimeField(auto_now_add = True)
     
