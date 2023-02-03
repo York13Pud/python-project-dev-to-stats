@@ -44,12 +44,21 @@ logger = logging.getLogger(__name__)
 def home_page(request):
     accounts = User.objects.all()
     #context = {"Users": user}
-    print(accounts[1].__dict__)
+    print(accounts[0].__dict__)
     return render(request = request, template_name = "login.html")
 
 
-def get_users(request):
-    accounts = User.objects.all()
-    #context = {"Users": user}
-    print(accounts.all)
+def login_user(request):
+    return render(request = request, template_name = "login.html")
+
+
+def logout_user(request):
+    return render(request = request, template_name = "login.html")
+
+
+def register_user(request):
+    return render(request = request, template_name = "login.html")
+
+
+def user_account(request):
     return render(request = request, template_name = "login.html")
