@@ -138,3 +138,4 @@ dmypy.json
 # Mic files to ignore
 database.db
 development_docs/.$003-db-design.drawio.bkp
+project/test.csv
