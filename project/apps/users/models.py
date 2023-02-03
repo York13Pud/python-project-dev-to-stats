@@ -2,10 +2,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django_cryptography.fields import encrypt
 
-# import uuid
 
 # --- Create the user application models here:
-
 class User(AbstractUser):
     """This class will Abstract the built-in django Users model and expand it with the below fields.
     The login method (username and password) will not change"""
