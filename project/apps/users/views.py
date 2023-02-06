@@ -86,6 +86,11 @@ def logout_user(request):
     return redirect(to = "login")
 
 
+def user_api_details(request):
+    if request.method == "POST":
+        print("hello")
+    return render(request = request, template_name = "api-key.html")
+
 def register_user(request):
     form = CreateUserForm
     if request.method == "POST":
