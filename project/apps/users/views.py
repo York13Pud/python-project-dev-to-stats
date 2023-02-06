@@ -6,6 +6,9 @@ from django.shortcuts import render, redirect
 
 from .models import User
 from .forms import CreateUserForm
+from .modules.dev_to_api import get_user_details
+
+import json
 import logging
 
 # --- Settings for the logging configuration:
@@ -87,11 +90,34 @@ def logout_user(request):
 
 
 def user_api_details(request):
+    page = None
+    
     if request.method == "POST":
-        print("hello")
-    return render(request = request, template_name = "api-key.html")
+        api_key = request.POST["api-key"]
+        user_details = get_user_details(api_key = api_key)
+        
+        context = {
+            "account_id": user_details["id"],
+            "username": user_details["username"],
+            "user_summary": user_details["summary"],
+            "location": user_details["location"],
+            "twitter_username": user_details["twitter_username"],
+            "github_username": user_details["github_username"],
+            "website_url": user_details["website_url"],
+            "profile_image": user_details["profile_image"],
+            "api_key": api_key,
+            "joined_on": user_details["joined_at"]
+        }
+        
+        print(context)
+        
+        return redirect(to = "home")
+    
+    return render(request = request, template_name = "api-key.html", context = context)
+
 
 def register_user(request):
+    print(request)
     form = CreateUserForm
     if request.method == "POST":
         form = CreateUserForm(request.POST)
@@ -115,7 +141,7 @@ def register_user(request):
             messages.error(request = request, 
                            message = "An error ocurred during registration. Please try again.")
     
-    context = {"form": form}
+    context += {"form": form}
     
     return render(request = request, context = context, template_name = "register.html")
 
