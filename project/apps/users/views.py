@@ -3,6 +3,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
+from django.http import HttpResponse
 
 from .models import User
 from .forms import CreateUserForm
@@ -90,15 +91,15 @@ def logout_user(request):
 
 
 def user_api_details(request):
-    page = None
-    
+
     if request.method == "POST":
         api_key = request.POST["api-key"]
         user_details = get_user_details(api_key = api_key)
         
-        context = {
+        request.session["user_api_details"] = {
             "account_id": user_details["id"],
             "username": user_details["username"],
+            "first_name": user_details["username"],
             "user_summary": user_details["summary"],
             "location": user_details["location"],
             "twitter_username": user_details["twitter_username"],
@@ -106,19 +107,19 @@ def user_api_details(request):
             "website_url": user_details["website_url"],
             "profile_image": user_details["profile_image"],
             "api_key": api_key,
-            "joined_on": user_details["joined_at"]
+            "joined_on": user_details["joined_at"],
         }
-        
-        print(context)
-        
-        return redirect(to = "home")
+              
+        return redirect(to = "register")
     
-    return render(request = request, template_name = "api-key.html", context = context)
+    return render(request = request, template_name = "api-key.html")
 
 
 def register_user(request):
-    print(request)
-    form = CreateUserForm
+    context = request.session["user_api_details"]
+    print(context)
+    
+    form = CreateUserForm(initial = context)
     if request.method == "POST":
         form = CreateUserForm(request.POST)
         # --- The below will check if the form is valid. If so, it will
@@ -130,20 +131,23 @@ def register_user(request):
             user.username = user.username.lower()
             user.save()
             
+            print("checkpoint 1")
             messages.success(request = request, 
                              message = "User account created!")
 
+            print("checkpoint 2")
             login(request = request, user = user)
             return redirect(to = "home")
         
         # --- If the form is not valid, the user will get an error message.
         else:
+            print("checkpoint 3")
             messages.error(request = request, 
                            message = "An error ocurred during registration. Please try again.")
-    
-    context += {"form": form}
-    
-    return render(request = request, context = context, template_name = "register.html")
+    context["form"] = form
+    print(context)
+    print("checkpoint 4")
+    return render(request = request, template_name = "register.html", context = context)
 
 
 def user_account(request):
