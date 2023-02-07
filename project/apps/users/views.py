@@ -90,7 +90,7 @@ def logout_user(request):
     return redirect(to = "login")
 
 
-def user_api_details(request):
+def register_api(request):
 
     if request.method == "POST":
         api_key = request.POST["api-key"]
@@ -110,12 +110,12 @@ def user_api_details(request):
             "joined_on": user_details["joined_at"],
         }
               
-        return redirect(to = "register")
+        return redirect(to = "register_details")
     
-    return render(request = request, template_name = "api-key.html")
+    return render(request = request, template_name = "register.html")
 
 
-def register_user(request):
+def register_details(request):
     context = request.session["user_api_details"]
     print(context)
     
