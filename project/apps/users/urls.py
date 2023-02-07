@@ -9,8 +9,8 @@ urlpatterns = [
     path(route = "", view = views.home_page, name = "home"),
     path(route = "login/", view = views.login_user, name = "login"),
     path(route = "logout/", view = views.logout_user, name = "logout"),
-    path(route = "api-key/", view = views.user_api_details, name = "api-key"),
-    path(route = "register/", view = views.register_user, name = "register"),
+    path(route = "register/", view = views.user_api_details, name = "register"),
+    path(route = "register/details", view = views.register_user, name = "register_details"),
     path(route = "account/", view = views.user_account, name = "account"),
 ]
 
