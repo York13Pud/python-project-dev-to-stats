@@ -6,32 +6,47 @@
     <div class="card">
         <div class="auth__header text-center">
             <h3>Register an Account</h3>
+            <p>{{ request.path }}</p>
         </div>
+        
+        {% if request.path == "/register/" %}
 
-        <form method="POST" action="{% url 'register' %}" class="form auth__form">
-            {% csrf_token %}
+            <form method="POST" action="{% url 'register' %}" class="form auth__form">
+                {% csrf_token %}
+                <label for="formInput#text">Enter Your Dev.to API Key: </label>
+                <input type="password" name="api-key" />
+                <input class="" type="submit" value="Submit" />
+            </form>
 
-            {% for field in form %}
-            <div class="form__field">
-                <label for="formInput#text">{{ field.label | title }}</label>
-                {{ field }}
+        {% else %}
 
-                {% comment %} {% if field.help_text %}
-                    <small>{{field.help_text}}</small>
-                {% endif %} {% endcomment %}
+            <form method="POST" action="{% url 'register_details' %}" class="form auth__form">
+                {% csrf_token %}
+                {% for field in form %}
+                
+                    <div class="form__field">
+                        <label for="formInput#text">{{ field.label | title }}</label>
+                        {{ field }}
 
-                {% for error in field.errors %}
-                    <p style="color: red;">{{ error }}</p>
+                        {% comment %} {% if field.help_text %}
+                            <small>{{field.help_text}}</small>
+                        {% endif %} {% endcomment %}
+
+                        {% for error in field.errors %}
+                            <p style="color: red;">{{ error }}</p>
+                        {% endfor %}
+
+                    </div>
+
                 {% endfor %}
 
-            </div>
+                <div class="auth__actions">
+                    <input class="" type="submit" value="Sign Up" />
+                </div>
+            </form>
 
-            {% endfor %}
+        {% endif %}
 
-            <div class="auth__actions">
-                <input class="" type="submit" value="Sign Up" />
-            </div>
-        </form>
         <div class="auth__alternative">
             <p>Already have an Account?</p>
             <a href="{% url 'login' %}">Log In</a>
