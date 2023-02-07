@@ -12,52 +12,58 @@
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-
-    <title>Welcome To Dev.To Statistics</title>  
+    <link rel="stylesheet" href="../static/css/style.css"">
+    <!-- <link rel="stylesheet" href="{{ url_for("static", filename = "css/style.css") }}"> -->
+    
+    <title>Welcome To {{ application name }}</title>  
 
 </head>
 
 <body class="d-flex flex-column min-vh-100 w-100">
     
     <!-- Navbar area starts -->
-    <nav class ="navbar navbar-expand-lg fixed-top navbar-dark bg-dark text-white" >
+    <nav class ="fixed-top navbar navbar-expand-lg navbar-dark bg-dark text-white p-3">
         <div class="container-fluid">
-            <div class="d-flex align-items-start justify-content-start">
-                <h1 class="navbar-brand text-white text-center"><i class=""></i> {{ dev.to stats }}</h1>
+            <div class="d-flex align-items-start justify-content-start ">
+                <h1 class="navbar-brand text-white text-center"><i class=""></i> {{ Logo goes here }}</h1>
             </div>
-            <button class="navbar-toggler text-black justify-content-end" type="button" data-bs-toggle="collapse" data-bs-target="#navbar">
-                <span class="navbar-toggler-icon text-black"></span>
+            <button class="navbar-toggler text-white justify-content-end" type="button" data-bs-toggle="collapse" data-bs-target="#navbar">
+                <span class="navbar-toggler-icon text-white"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbar">
                 <div class="navbar-nav">
                     <a class="nav-item nav-link text-white" href="{{ url_for("views.home") }}"><span class="bi bi-house"></span> Home</a>
-                        <a class="nav-item nav-link text-white" href="{{ url_for("views.posts", username = current_user.username) }}"><span class="bi bi-list-ul"></span> My Articles</a>
-                        <a class="nav-item nav-link text-white" href="{{ url_for("views.create_post") }}"><span class="bi bi-pencil"></span> Create Article</a>
-                        <a class="nav-item nav-link text-white" href="{{ url_for("views.delete_post", post_id = post.id) }}"><span class="bi bi-x-square" title="Delete Article"></span> Delete Article</a>
-                        <a class="nav-item nav-link text-white" href="{{ url_for("views.edit_post", post_id = post.id) }}"><span class="bi bi-pencil-fill" title="Edit Article"></span> Edit Article</a>
-                        <a class="nav-item nav-link text-white" href="{{ url_for("auth.logout") }}"><span class="bi bi-box-arrow-left"></span> Logout</a>
-                        <a class="nav-item nav-link text-white" href="{{ url_for("auth.register") }}"><span class="bi bi-pencil"></span> Register</a>
-                        <a class="nav-item nav-link text-white" href="{{ url_for("auth.login") }}"><span class="bi bi-box-arrow-in-right"></span> Login</a>
+                    <a class="nav-item nav-link text-white" href="{{ url_for("auth.logout") }}"><span class="bi bi-box-arrow-left"></span> Logout</a>
+                    <a class="nav-item nav-link text-white" href="{{ url_for("auth.register") }}"><span class="bi bi-pencil"></span> Register</a>
+                    <a class="nav-item nav-link text-white" href="{{ url_for("auth.login") }}"><span class="bi bi-box-arrow-in-right"></span> Login</a>
                 </div>
             </div> 
         </div>
     </nav>
     <!-- Navbar area ends -->
     
-    <div class="dflex image-header-text-center" id="image-header-container">
-        <h1 class="header-title-text">{{ header_title }}</h1>
-    </div>
+
     
     <!-- Main body content area starts -->
-    <div class="container content w-75 main">
+    <div class="container content w-75 main main-container">
     
+        <p>1Pariatur et cupidatat nulla culpa laboris dolore occaecat ex adipisicing culpa consequat deserunt. Lorem proident commodo incididunt do ex id. Ad velit ea mollit anim et cupidatat veniam commodo magna. Amet nisi laborum qui sit. Laboris amet ut dolore officia anim tempor.</p>
         <p>Pariatur et cupidatat nulla culpa laboris dolore occaecat ex adipisicing culpa consequat deserunt. Lorem proident commodo incididunt do ex id. Ad velit ea mollit anim et cupidatat veniam commodo magna. Amet nisi laborum qui sit. Laboris amet ut dolore officia anim tempor.</p>
+        <p>Pariatur et cupidatat nulla culpa laboris dolore occaecat ex adipisicing culpa consequat deserunt. Lorem proident commodo incididunt do ex id. Ad velit ea mollit anim et cupidatat veniam commodo magna. Amet nisi laborum qui sit. Laboris amet ut dolore officia anim tempor.</p>
+        <p>Pariatur et cupidatat nulla culpa laboris dolore occaecat ex adipisicing culpa consequat deserunt. Lorem proident commodo incididunt do ex id. Ad velit ea mollit anim et cupidatat veniam commodo magna. Amet nisi laborum qui sit. Laboris amet ut dolore officia anim tempor.</p>
+        <p>Pariatur et cupidatat nulla culpa laboris dolore occaecat ex adipisicing culpa consequat deserunt. Lorem proident commodo incididunt do ex id. Ad velit ea mollit anim et cupidatat veniam commodo magna. Amet nisi laborum qui sit. Laboris amet ut dolore officia anim tempor.</p>
+        <p>Pariatur et cupidatat nulla culpa laboris dolore occaecat ex adipisicing culpa consequat deserunt. Lorem proident commodo incididunt do ex id. Ad velit ea mollit anim et cupidatat veniam commodo magna. Amet nisi laborum qui sit. Laboris amet ut dolore officia anim tempor.</p>
+        <p>Pariatur et cupidatat nulla culpa laboris dolore occaecat ex adipisicing culpa consequat deserunt. Lorem proident commodo incididunt do ex id. Ad velit ea mollit anim et cupidatat veniam commodo magna. Amet nisi laborum qui sit. Laboris amet ut dolore officia anim tempor.</p>
+        <p>Pariatur et cupidatat nulla culpa laboris dolore occaecat ex adipisicing culpa consequat deserunt. Lorem proident commodo incididunt do ex id. Ad velit ea mollit anim et cupidatat veniam commodo magna. Amet nisi laborum qui sit. Laboris amet ut dolore officia anim tempor.</p>
+        <p>Pariatur et cupidatat nulla culpa laboris dolore occaecat ex adipisicing culpa consequat deserunt. Lorem proident commodo incididunt do ex id. Ad velit ea mollit anim et cupidatat veniam commodo magna. Amet nisi laborum qui sit. Laboris amet ut dolore officia anim tempor.</p>
+        <p>1Pariatur et cupidatat nulla culpa laboris dolore occaecat ex adipisicing culpa consequat deserunt. Lorem proident commodo incididunt do ex id. Ad velit ea mollit anim et cupidatat veniam commodo magna. Amet nisi laborum qui sit. Laboris amet ut dolore officia anim tempor.</p>
+        <p>2Pariatur et cupidatat nulla culpa laboris dolore occaecat ex adipisicing culpa consequat deserunt. Lorem proident commodo incididunt do ex id. Ad velit ea mollit anim et cupidatat veniam commodo magna. Amet nisi laborum qui sit. Laboris amet ut dolore officia anim tempor.</p>
 
     </div>
     <!-- Main body content area ends -->
 
         <!-- Footer area starts -->
-        <div class="container-fluid bg-dark mt-auto w-100 p-3 text-white text-center">
+        <div class="container-fixed fixed-bottom bg-dark mt-auto w-100 p-3 text-white text-center">
             <footer>
                 <p>
                     Copyright© {{ year }}
