@@ -8,7 +8,7 @@ class User(AbstractUser):
     """This class will Abstract the built-in django Users model and expand it with the below fields.
     The login method (username and password) will not change"""
     
-    account_id = models.IntegerField(null = True, blank = True)
+    account_id = models.CharField(null = True, blank = True, max_length = 10)
     user_summary = models.TextField(max_length = 2000, null = True, blank = True)
     location = models.CharField(max_length = 500, null = True, blank = True)
     twitter_username = models.CharField(max_length = 100, null = True, blank = True)
