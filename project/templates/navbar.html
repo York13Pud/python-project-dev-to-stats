@@ -11,10 +11,10 @@
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbar">
             <div class="navbar-nav">
-                <a class="nav-item nav-link text-white" href="#"><span class="bi bi-house"></span> Home</a>
-                <a class="nav-item nav-link text-white" href="#"><span class="bi bi-box-arrow-left"></span> Logout</a>
-                <a class="nav-item nav-link text-white" href="#"><span class="bi bi-pencil"></span> Register</a>
-                <a class="nav-item nav-link text-white" href="#"><span class="bi bi-box-arrow-in-right"></span> Login</a>
+                <a class="nav-item nav-link text-white" href="{% url 'home' %}"><span class="bi bi-house"></span> Home</a>
+                <a class="nav-item nav-link text-white" href="{% url 'logout' %}"><span class="bi bi-box-arrow-left"></span> Logout</a>
+                <a class="nav-item nav-link text-white" href="{% url 'register' %}"><span class="bi bi-pencil"></span> Register</a>
+                <a class="nav-item nav-link text-white" href="{% url 'login' %}"><span class="bi bi-box-arrow-in-right"></span> Login</a>
             </div>
         </div> 
     </div>
