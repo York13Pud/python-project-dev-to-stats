@@ -116,10 +116,9 @@ def register_api(request):
 
 
 def register_details(request):
-    context = request.session["user_api_details"]
-    print(context)
-    
+    context = request.session["user_api_details"]  
     form = CreateUserForm(initial = context)
+    
     if request.method == "POST":
         form = CreateUserForm(request.POST)
         # --- The below will check if the form is valid. If so, it will
@@ -145,8 +144,8 @@ def register_details(request):
             messages.error(request = request, 
                            message = "An error ocurred during registration. Please try again.")
     context["form"] = form
-    print(context)
     print("checkpoint 4")
+    
     return render(request = request, template_name = "register.html", context = context)
 
 
