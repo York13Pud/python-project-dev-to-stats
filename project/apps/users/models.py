@@ -15,8 +15,9 @@ class User(AbstractUser):
     github_username = models.CharField(max_length = 100, null = True, blank = True)
     website_url = models.URLField(max_length = 250, null = True, blank = True)
     # --- Note: Change profile_image to URLField
-    profile_image = models.ImageField(null = True,  blank = True, upload_to = "profiles/",
-                                      default = "profiles/default.png")
+    profile_image = models.URLField(max_length = 1000, null = True, blank = True)
+    # profile_image = models.ImageField(null = True,  blank = True, upload_to = "profiles/",
+    #                                   default = "profiles/default.png")
     api_key = encrypt(models.CharField(max_length = 50, null = True, blank = True))
     joined_on = models.DateTimeField(auto_now_add = False, null = True, blank = True)
 
