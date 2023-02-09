@@ -32,6 +32,7 @@
 
             <form method="POST" action="{% url 'register_details' %}" class="form">
                 {% csrf_token %}
+              
                 {% for field in form %}
                 
                     <div class="m-4">
@@ -49,11 +50,43 @@
                     </div>
 
                 {% endfor %}
+                <div class="m-4">
+                    <label class="form-label" for="formInput#text">{{ form.username.label | title }}</label>
+                    {{ form.username }}
+                    {% for error in form.username.errors %}
+                        <p style="color: red;">{{ error }}</p>
+                    {% endfor %}
+                </div>
+                
+                <div class="m-4">
+                    <label class="form-label" for="formInput#text">{{ form.password1.label | title }}</label>
+                    {{ form.password1 }}
+                    {% for error in form.password1.errors %}
+                        <p style="color: red;">{{ error }}</p>
+                    {% endfor %}
+                    {% if form.password1.help_text %}
+                        <small>{{ form.password1.help_text }}</small>
+                    {% endif %}
+                </div>
+                
+                <div class="m-4">
+                    <label class="form-label" for="formInput#text">{{ form.password2.label | title }}</label>
+                    {{ form.password2 }}
+                    {% for error in form.password2.errors %}
+                        <p style="color: red;">{{ error }}</p>
+                    {% endfor %}
+                    {% if form.password2.help_text %}
+                        <small>{{ form.password2.help_text }}</small>
+                    {% endif %}
+                </div>
 
                 <div class="m-4">
                     <input class="btn btn-dark" type="submit" value="Sign Up" />
                 </div>
+
             </form>
+
+
 
         {% endif %}
 
