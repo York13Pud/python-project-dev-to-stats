@@ -29,14 +29,14 @@
         </form>
         
         {% else %}
-
+        
             <form method="POST" action="{% url 'register_details' %}" class="form">
                 {% csrf_token %}
               
-                {% for field in form %}
+                {% comment %} {% for field in form %}
                 
                     <div class="m-4">
-                        <label class="form-label" for="formInput#text">{{ field.label | title }}</label>
+                        <label class="form-label" for="formInput#text"><h5>{{ field.label | title }}</h5></label>
                         {{ field }}
 
                         {% if field.help_text %}
@@ -49,9 +49,9 @@
 
                     </div>
 
-                {% endfor %}
+                {% endfor %} {% endcomment %}
                 <div class="m-4">
-                    <label class="form-label" for="formInput#text">{{ form.username.label | title }}</label>
+                    <label class="form-label" for="formInput#text"><h5>{{ form.username.label | title }}</h5></label>
                     {{ form.username }}
                     {% for error in form.username.errors %}
                         <p style="color: red;">{{ error }}</p>
@@ -59,7 +59,7 @@
                 </div>
                 
                 <div class="m-4">
-                    <label class="form-label" for="formInput#text">{{ form.password1.label | title }}</label>
+                    <label class="form-label" for="formInput#text"><h5>{{ form.password1.label | title }}</h5></label>
                     {{ form.password1 }}
                     {% for error in form.password1.errors %}
                         <p style="color: red;">{{ error }}</p>
@@ -70,7 +70,7 @@
                 </div>
                 
                 <div class="m-4">
-                    <label class="form-label" for="formInput#text">{{ form.password2.label | title }}</label>
+                    <label class="form-label" for="formInput#text"><h5>{{ form.password2.label | title }}</h5></label>
                     {{ form.password2 }}
                     {% for error in form.password2.errors %}
                         <p style="color: red;">{{ error }}</p>
@@ -80,7 +80,55 @@
                     {% endif %}
                 </div>
 
+                <div class="m-4 ">
+                    <h3 class="section-space">Additional Information</h3>
+                    <p>In addition to the above username and password that you specified, the below information will also be saved in your profile:</p>
+                </div>
+                
+                <table class="m-4 w-100 table" border=0>
+                    <tr class="">
+                        <td class=""><label class="form-label" for="formInput#text"><h5>{{ form.account_id.label | title }}</h5></label></td>
+                        <td class=""><label class="form-label" for="formInput#text"><h5>{{ form.first_name.label | title }}</h5></label></td>
+                        <td class=""><label class="form-label" for="formInput#text"><h5>{{ form.location.label | title }}</h5></label></td>
+                    </tr>
+                    <tr class="">
+                        <td class="">{{ form.account_id }}</td>
+                        <td class="">{{ form.first_name }}</td>
+                        <td class="">{{ form.location }}</td>
+                    </tr>
+                    <tr class="">
+                        <td class=""><label class="form-label" for="formInput#text"><h5>{{ form.api_key.label | upper }}</h5></label></td>
+                        <td class=""><label class="form-label" for="formInput#text"><h5>{{ form.joined_on.label | title }}</h5></label></td>
+                        <td class=""><label class="form-label" for="formInput#text"><h5>{{ form.profile_image.label | title }}</h5></label></td>
+                    </tr>
+                    <tr class="">
+                        <td class="">{{ form.api_key }}</td>
+                        <td class="">{{ form.joined_on }}</td>
+                        <td class="">{{ form.profile_image }}</td>
+                    </tr>
+                    <tr class="">
+                        <td class=""><label class="form-label" for="formInput#text"><h5>{{ form.github_username.label | title }}</h5></label></td>
+                        <td class=""><label class="form-label" for="formInput#text"><h5>{{ form.twitter_username.label | title }}</h5></label></td>
+                        <td class=""><label class="form-label" for="formInput#text"><h5>{{ form.website_url.label | title }}</h5></label></td>
+                    </tr>
+                    <tr class="">
+                        <td>{{ form.github_username }}</td>
+                        <td>{{ form.twitter_username }}</td>
+                        <td>{{ form.website_url }}</td>
+                    </tr>
+                    <tr class="">
+                        <td class=""><label class="form-label" for="formInput#text"><h5>{{ form.user_summary.label | title }}</h5></label></td>
+                    </tr>
+                    <tr>
+                        <td colspan=3>{{ form.user_summary }}</td>
+                    </tr>
+                </table>
+
+
+
+
                 <div class="m-4">
+                    {% comment %} <input class="btn btn-dark" type="submit" value="Cancel" /> {% endcomment %}
                     <input class="btn btn-dark" type="submit" value="Sign Up" />
                 </div>
 
