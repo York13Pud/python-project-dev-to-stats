@@ -2,7 +2,7 @@
 import requests
 import json
 
-def get_user_details(api_key:str):
+def get_user_details(api_key:str, api_endpoint:str):
     """Function:
 
     Makes an API call to dev.to which pulls the list of published articles for your account.
@@ -19,7 +19,7 @@ def get_user_details(api_key:str):
 
     params = {}
 
-    URL = "https://dev.to/api/users/me"
+    URL = api_endpoint
     
     # --- Execute an API GET request to the API:
     
