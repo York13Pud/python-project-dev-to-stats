@@ -94,7 +94,8 @@ def register_api(request):
 
     if request.method == "POST":
         api_key = request.POST["api-key"]
-        user_details = get_user_details(api_key = api_key)
+        user_details = get_user_details(api_key = api_key, 
+                                        api_endpoint = "https://dev.to/api/users/me")
         
         request.session["user_api_details"] = {
             "account_id": user_details["id"],
