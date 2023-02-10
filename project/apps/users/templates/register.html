@@ -14,7 +14,7 @@
             {% csrf_token %}
             <div class="m-4">
                 <label class="form-label" for="formInput#text"><h5>Enter Your Dev.to API Key:</h5></label>
-                <input class="form-control" type="password" name="api-key" />
+                <input class="form-control" type="text" name="api-key" />
             </div>
             {% if field.help_text %}
                 <small>{{field.help_text}}</small>
@@ -122,10 +122,9 @@
 
         {% endif %}
 
-        {% comment %} <div class="m-4">
-            <p>Already have an Account?</p>
-            <a href="{% url 'login' %}">Log In</a>
-        </div> {% endcomment %}
+        <div class="m-4">
+            <p>Already have an Account?<a href="{% url 'login' %}"> Sign In</a></p>
+        </div>
     </div>
 </div>
 
