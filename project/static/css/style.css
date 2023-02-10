@@ -12,10 +12,13 @@
     padding-left: 10px;
 }
 
+.alert-message {
+    margin-top: 74px;
+}
 
 .main-container {
-    margin-top: 120px; 
-    margin-bottom: 120px; 
+    padding-top: 100px; 
+    margin-bottom: 100px; 
 }
 
 #image-footer-container {
@@ -40,7 +43,7 @@
 }
 
 .main {
-    position:relative;
+    position:fixed;
     overflow-x: hidden;
 }
 
