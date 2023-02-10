@@ -13,7 +13,7 @@
         <form method="POST" action="{% url 'register' %}" class="form auth__form">
             {% csrf_token %}
             <div class="m-4">
-                <label class="form-label" for="formInput#text">Enter Your Dev.to API Key: </label>
+                <label class="form-label" for="formInput#text"><h5>Enter Your Dev.to API Key:</h5></label>
                 <input class="form-control" type="password" name="api-key" />
             </div>
             {% if field.help_text %}
@@ -24,7 +24,7 @@
                 <p style="color: red;">{{ error }}</p>
             {% endfor %}
             <div class="m-4">
-                <input class="btn btn-dark" type="submit" value="Submit" />
+                <input class="btn btn-dark btn-lg" type="submit" value="Submit" />
             </div>
         </form>
         
@@ -33,23 +33,6 @@
             <form method="POST" action="{% url 'register_details' %}" class="form">
                 {% csrf_token %}
               
-                {% comment %} {% for field in form %}
-                
-                    <div class="m-4">
-                        <label class="form-label" for="formInput#text"><h5>{{ field.label | title }}</h5></label>
-                        {{ field }}
-
-                        {% if field.help_text %}
-                            <small>{{field.help_text}}</small>
-                        {% endif %}
-
-                        {% for error in field.errors %}
-                            <p style="color: red;">{{ error }}</p>
-                        {% endfor %}
-
-                    </div>
-
-                {% endfor %} {% endcomment %}
                 <div class="m-4">
                     <label class="form-label" for="formInput#text"><h5>{{ form.username.label | title }}</h5></label>
                     {{ form.username }}
@@ -129,7 +112,8 @@
 
                 <div class="m-4">
                     {% comment %} <input class="btn btn-dark" type="submit" value="Cancel" /> {% endcomment %}
-                    <input class="btn btn-dark" type="submit" value="Sign Up" />
+                    <input class="btn btn-dark btn-lg" type="submit" value="Sign Up" />
+                    <a class="btn btn-dark btn-lg" href="{% url 'home' %}">Cancel</a>
                 </div>
 
             </form>
@@ -138,10 +122,10 @@
 
         {% endif %}
 
-        <div class="m-4">
+        {% comment %} <div class="m-4">
             <p>Already have an Account?</p>
             <a href="{% url 'login' %}">Log In</a>
-        </div>
+        </div> {% endcomment %}
     </div>
 </div>
 
