@@ -1,6 +1,6 @@
 # --- Import the required libraries:
 import requests
-import json
+
 
 def get_user_details(api_key:str, api_endpoint:str):
     """Function:
@@ -26,15 +26,11 @@ def get_user_details(api_key:str, api_endpoint:str):
     response = requests.get(url = URL, 
                             params = params, 
                             headers = headers)
+
+    response_json = response.json()
+    response_json["response"] = response.status_code
     
-    if response.status_code == 200:
-        # print(response.json())
-        return response.json()
-    
-    else:
-        print(response.content)
-        # --- Add a redirect to an appropriate page
-        return response
+    return response_json
 
 
 def get_published_articles(api_key:str):
