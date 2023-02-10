@@ -22,21 +22,12 @@
 }
 
 #image-footer-container {
-    /* overflow: hidden; */
     position: fixed;
     margin-bottom: 10px; 
     width: 100%; 
     z-index:1;
-
-/* .image-header-text-center {
-    display: flex;
-    justify-content: center;
-    align-items: center; 
-    width: 250px;
-    height: 150px;
-    border : 0px;
     
-} */
+}
 
 #collapsed-menu {
     z-index: 2;
