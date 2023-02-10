@@ -69,8 +69,9 @@ def login_user(request):
             user = User.objects.get(username = username)
         except:
             messages.error(request = request,
-                           message = "Username does not exist")
-        
+                           message = "Username or password is incorrect. Please try again.")
+            return redirect("login")
+            
         user = authenticate(request = request,
                             username = username,
                             password = password)
@@ -79,7 +80,8 @@ def login_user(request):
             login(request, user = user)
             return redirect("home")
         else:
-            print("Username or password is incorrect")
+            messages.error(request = request,
+                           message = "Username or password is incorrect. Please try again.")
     
     return render(request = request, template_name = "login.html")
 
@@ -94,25 +96,35 @@ def register_api(request):
 
     if request.method == "POST":
         api_key = request.POST["api-key"]
+        #try:
         user_details = get_user_details(api_key = api_key, 
                                         api_endpoint = "https://dev.to/api/users/me")
+        #except:
+            # messages.error(request = request,
+            #                message = "The supplied API key is not correct. Please try again.")
         
-        request.session["user_api_details"] = {
-            "account_id": user_details["id"],
-            "username": user_details["username"],
-            "first_name": user_details["username"],
-            "user_summary": user_details["summary"],
-            "location": user_details["location"],
-            "twitter_username": user_details["twitter_username"],
-            "github_username": user_details["github_username"],
-            "website_url": user_details["website_url"],
-            "profile_image": user_details["profile_image"],
-            "api_key": api_key,
-            "joined_on": user_details["joined_at"],
-        }
-              
-        return redirect(to = "register_details")
-    
+        print(user_details)
+        if user_details["response"] is not 200:
+            messages.error(request = request, 
+                           message = "An error ocurred during registration. Please try again.")
+        
+        else:    
+            request.session["user_api_details"] = {
+                "account_id": user_details["id"],
+                "username": user_details["username"],
+                "first_name": user_details["username"],
+                "user_summary": user_details["summary"],
+                "location": user_details["location"],
+                "twitter_username": user_details["twitter_username"],
+                "github_username": user_details["github_username"],
+                "website_url": user_details["website_url"],
+                "profile_image": user_details["profile_image"],
+                "api_key": api_key,
+                "joined_on": user_details["joined_at"],
+            }
+                
+            return redirect(to = "register_details")
+            
     return render(request = request, template_name = "register.html")
 
 
