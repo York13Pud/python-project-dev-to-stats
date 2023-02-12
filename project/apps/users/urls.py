@@ -10,7 +10,7 @@ urlpatterns = [
     path(route = "logout/", view = views.logout_user, name = "logout"),
     path(route = "register/", view = views.register_api, name = "register"),
     path(route = "register/details", view = views.register_details, name = "register_details"),
-    path(route = "account/", view = views.user_account, name = "account"),
+    path(route = "profile/", view = views.user_profile, name = "profile"),
 ]
 
 
