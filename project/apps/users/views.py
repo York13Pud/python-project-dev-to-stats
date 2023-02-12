@@ -162,5 +162,5 @@ def register_details(request):
     return render(request = request, template_name = "register.html", context = context)
 
 
-def user_account(request):
-    return render(request = request, template_name = "login.html")
+def user_profile(request):
+    return render(request = request, template_name = "user_profile.html")
