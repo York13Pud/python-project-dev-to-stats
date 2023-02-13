@@ -162,5 +162,10 @@ def register_details(request):
     return render(request = request, template_name = "register.html", context = context)
 
 
+@login_required(login_url = "login")
 def user_profile(request):
-    return render(request = request, template_name = "user_profile.html")
+    user = request.user
+    print(user.github_username)
+    context = {"profile": user}
+    
+    return render(request = request, template_name = "user_profile.html", context = context)
