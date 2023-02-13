@@ -104,7 +104,7 @@ def register_api(request):
             #                message = "The supplied API key is not correct. Please try again.")
         
         print(user_details)
-        if user_details["response"] is not 200:
+        if user_details["response"] != 200:
             messages.error(request = request, 
                            message = "An error ocurred during registration. Please try again.")
         
