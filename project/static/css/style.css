@@ -1,15 +1,5 @@
-.link-break-spacing {
-    padding-right: 6px;
-    padding-left: 6px;
-    font-size: 18px;
-}
-
 .section-space {
     margin-top: 3em;
-}
-
-.post-function-spacing {
-    padding-left: 10px;
 }
 
 .alert-message {
@@ -18,15 +8,7 @@
 
 .main-container {
     margin-top: 105px; 
-    margin-bottom: 100px; 
-}
-
-#image-footer-container {
-    position: fixed;
-    margin-bottom: 10px; 
-    width: 100%; 
-    z-index:1;
-    
+    margin-bottom: 150px; 
 }
 
 #collapsed-menu {
@@ -34,7 +16,7 @@
 }
 
 .main {
-    position:fixed;
+    position:fluid;
     overflow-x: hidden;
 }
 
