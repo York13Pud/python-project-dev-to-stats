@@ -21,22 +21,6 @@
         </div>
         <!-- Main body content starts -->
         <div class="container content w-75 main main-container">
-        
-            {% comment %} {% if messages %}
-                
-                {% for message in messages %}
-                    <div class="alert 
-                        {% if message.tags == "error" %}
-                            alert-danger
-                        {% else %}
-                            alert-{{ message.tags }}
-                        {% endif %}
-                        ">
-                        <strong>{{ message.tags | title }}! </strong>{{ message }}<button class="float-end btn-close" data-bs-dismiss="alert"></button>
-                    </div>
-                {% endfor %}
-    
-            {% endif %} {% endcomment %}
 
             {% block content %}
 
