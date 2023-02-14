@@ -3,14 +3,15 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+
 
 from .models import User
-from .forms import CreateUserForm
+from .forms import CreateUserForm, SetPasswordForm
 from .modules.dev_to_api import get_user_details
 
-import json
+
 import logging
+
 
 # --- Settings for the logging configuration:
 logging.config.dictConfig({
@@ -48,7 +49,9 @@ logging.config.dictConfig({
 
 logger = logging.getLogger(__name__)
 
-# Create your views here.
+
+# --- Create your views here.
+
 
 @login_required(login_url = "login")
 def home_page(request):
@@ -84,12 +87,6 @@ def login_user(request):
                            message = "Username or password is incorrect. Please try again.")
     
     return render(request = request, template_name = "login.html")
-
-
-@login_required(login_url = "login")
-def logout_user(request):
-    logout(request = request)
-    return redirect(to = "login")
 
 
 def register_api(request):
@@ -163,9 +160,33 @@ def register_details(request):
 
 
 @login_required(login_url = "login")
+def logout_user(request):
+    logout(request = request)
+    return redirect(to = "login")
+
+
+@login_required(login_url = "login")
 def user_profile(request):
     user = request.user
-    print(user.github_username)
     context = {"profile": user}
     
     return render(request = request, template_name = "user_profile.html", context = context)
+
+
+@login_required(login_url = "login")
+def change_password(request):
+    user = request.user
+    if request.method == 'POST':
+        form = SetPasswordForm(user, request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Your password has been changed")
+            return redirect('login')
+        else:
+            for error in list(form.errors.values()):
+                messages.error(request, error)
+
+    form = SetPasswordForm(user)
+    context = {'form': form}
+    
+    return render(request = request, template_name = 'change_password.html', context = context)
