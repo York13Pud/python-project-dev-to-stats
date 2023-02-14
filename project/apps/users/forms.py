@@ -1,5 +1,4 @@
-from django.contrib.auth.forms import UserCreationForm
-# from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm, SetPasswordForm
 from .models import User
 
 
@@ -45,3 +44,9 @@ class CreateUserForm(UserCreationForm):
         self.fields["profile_image"].widget.attrs = read_only
         self.fields["api_key"].widget.attrs = read_only
         self.fields["joined_on"].widget.attrs = read_only
+
+
+class SetPasswordForm(SetPasswordForm):
+    class Meta:
+        model = User
+        fields = ['new_password1', 'new_password2']
