@@ -11,6 +11,7 @@ urlpatterns = [
     path(route = "register/", view = views.register_api, name = "register"),
     path(route = "register/details", view = views.register_details, name = "register_details"),
     path(route = "profile/", view = views.user_profile, name = "profile"),
+    path(route = "update-profile/", view = views.update_user_profile, name = "update_profile"),
     path(route = "change-password/", view = views.change_password, name = "change_password"),
 ]
 
