@@ -140,21 +140,21 @@ def register_details(request):
             user.username = user.username.lower()
             user.save()
             
-            print("checkpoint 1")
+            # print("checkpoint 1")
             messages.success(request = request, 
                              message = "User account created!")
 
-            print("checkpoint 2")
+            # print("checkpoint 2")
             login(request = request, user = user)
             return redirect(to = "home")
         
         # --- If the form is not valid, the user will get an error message.
         else:
-            print("checkpoint 3")
+            # print("checkpoint 3")
             messages.error(request = request, 
                            message = "An error ocurred during registration. Please try again.")
     context["form"] = form
-    print("checkpoint 4")
+    # print("checkpoint 4")
     
     return render(request = request, template_name = "register.html", context = context)
 
@@ -171,6 +171,11 @@ def user_profile(request):
     context = {"profile": user}
     
     return render(request = request, template_name = "user_profile.html", context = context)
+
+
+@login_required(login_url = "login")
+def update_user_profile(request):
+    pass
 
 
 @login_required(login_url = "login")
