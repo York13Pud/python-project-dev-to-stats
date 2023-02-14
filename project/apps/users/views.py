@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 
 
 from .models import User
-from .forms import CreateUserForm, SetPasswordForm
+from .forms import CreateUserForm, SetPasswordForm, UpdateProfileForm
 from .modules.dev_to_api import get_user_details
 
 
@@ -175,7 +175,53 @@ def user_profile(request):
 
 @login_required(login_url = "login")
 def update_user_profile(request):
-    pass
+    if request.method == "POST":
+        
+        user_details = request.user
+        form = UpdateProfileForm(request.POST, request.FILES, instance = user_details)
+        
+        # --- The below will check if the form is valid. If so, it will
+        # --- save tbe form data temporarily, set the username to lowercase,
+        # --- save the user in the database, create a profile (signal),
+        # --- return a success message and log the user in.
+        
+        if form.is_valid():
+            user = form.save(commit = False)
+            user.username = user.username.lower()
+            user.save()
+            
+            messages.success(request = request, 
+                             message = "User account updated!")    
+            
+            return redirect(to = "profile")
+    
+    
+    # --- 1. Set user to be the user in the request:    
+    user = request.user
+    
+    # --- 2. Make API call:
+    api_key = user.api_key
+    print(user.id)
+    user_details = get_user_details(api_key = api_key,
+                                    api_endpoint = "https://dev.to/api/users/me")
+    
+    user_details_dict = {
+        "account_id": user_details["id"],
+        "username": user_details["username"],
+        "first_name": user_details["username"],
+        "user_summary": user_details["summary"],
+        "location": user_details["location"],
+        "twitter_username": user_details["twitter_username"],
+        "github_username": user_details["github_username"],
+        "website_url": user_details["website_url"],
+        "profile_image": user_details["profile_image"],
+    }    
+         
+    form = UpdateProfileForm(initial = user_details_dict)
+    
+    context = {"form": form}
+        
+    return render(request = request, template_name = "register.html", context = context)
 
 
 @login_required(login_url = "login")
