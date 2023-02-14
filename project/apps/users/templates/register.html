@@ -4,35 +4,15 @@
 
 <div class="">
     <div class="m-4">
-        <div class="m-4">
-            <h3>Create An Account</h3>
-        </div>
         
-        {% if request.path == "/register/" %}
-        
-        <form method="POST" action="{% url 'register' %}" class="form auth__form">
-            {% csrf_token %}
+        {% if request.path == "/register/details" %}
             <div class="m-4">
-                <label class="form-label" for="formInput#text"><h5>Enter Your Dev.to API Key:</h5></label>
-                <input class="form-control" type="text" name="api-key" />
+                <h3>Create An Account</h3>
             </div>
-            {% if field.help_text %}
-                <small>{{field.help_text}}</small>
-            {% endif %}
-
-            {% for error in field.errors %}
-                <p style="color: red;">{{ error }}</p>
-            {% endfor %}
-            <div class="m-4">
-                <input class="btn btn-dark btn-lg" type="submit" value="Submit" />
-            </div>
-        </form>
-        
-        {% else %}
-        
+            
             <form method="POST" action="{% url 'register_details' %}" class="form">
                 {% csrf_token %}
-              
+            
                 <div class="m-4">
                     <label class="form-label" for="formInput#text"><h5>{{ form.username.label | title }}</h5></label>
                     {{ form.username }}
@@ -109,18 +89,97 @@
 
                 <div class="m-4">
                     <input class="btn btn-dark btn-lg" type="submit" value="Sign Up" />
-                    <a class="btn btn-dark btn-lg" href="{% url 'home' %}">Cancel</a>
+                    <a class="btn btn-dark btn-lg" href="{% url 'login' %}">Cancel</a>
+                </div>
+
+            </form>
+        
+        {% elif request.path == "/update-profile/" %}
+            <div class="m-4">
+                <h3>Update Your Account</h3>
+            </div>
+            
+            <form method="POST" action="{% url 'update_profile' %}" class="form">
+                {% csrf_token %}
+
+                <div class="m-4 ">
+                    <p class="section-space">Please check that below information is correct and then click on update.</p>
+                </div>
+                
+                <table class="m-4 w-100 table" border=0>
+                    <tr class="">
+                        <td class=""><label class="form-label" for="formInput#text"><h5>{{ form.account_id.label | title }}</h5></label></td>
+                        <td class=""><label class="form-label" for="formInput#text"><h5>{{ form.first_name.label | title }}</h5></label></td>
+                        <td class=""><label class="form-label" for="formInput#text"><h5>{{ form.location.label | title }}</h5></label></td>
+                    </tr>
+                    <tr class="">
+                        <td class="">{{ form.account_id }}</td>
+                        <td class="">{{ form.first_name }}</td>
+                        <td class="">{{ form.location }}</td>
+                    </tr>
+                    <tr class="">
+                        <td class=""><label class="form-label" for="formInput#text"><h5>{{ form.api_key.label | upper }}</h5></label></td>
+                        <td class=""><label class="form-label" for="formInput#text"><h5>{{ form.joined_on.label | title }}</h5></label></td>
+                        <td class=""><label class="form-label" for="formInput#text"><h5>{{ form.profile_image.label | title }} Location</h5></label></td>
+                    </tr>
+                    <tr class="">
+                        <td class="">{{ form.api_key }}</td>
+                        <td class="">{{ form.joined_on }}</td>
+                        <td class="">{{ form.profile_image }}</td>
+                    </tr>
+                    <tr class="">
+                        <td class=""><label class="form-label" for="formInput#text"><h5>{{ form.github_username.label | title }}</h5></label></td>
+                        <td class=""><label class="form-label" for="formInput#text"><h5>{{ form.twitter_username.label | title }}</h5></label></td>
+                        <td class=""><label class="form-label" for="formInput#text"><h5>{{ form.website_url.label | title }}</h5></label></td>
+                    </tr>
+                    <tr class="">
+                        <td>{{ form.github_username }}</td>
+                        <td>{{ form.twitter_username }}</td>
+                        <td>{{ form.website_url }}</td>
+                    </tr>
+                    <tr class="">
+                        <td class=""><label class="form-label" for="formInput#text"><h5>{{ form.user_summary.label | title }}</h5></label></td>
+                    </tr>
+                    <tr>
+                        <td colspan=3>{{ form.user_summary }}</td>
+                    </tr>
+                </table>
+
+                <div class="m-4">
+                    <input class="btn btn-dark btn-lg" type="submit" value="Update" />
+                    <a class="btn btn-dark btn-lg" href="{% url 'profile' %}">Cancel</a>
                 </div>
 
             </form>
 
+        {% else %}
+        
+            <form method="POST" action="{% url 'register' %}" class="form auth__form">
+                {% csrf_token %}
+                <div class="m-4">
+                    <label class="form-label" for="formInput#text"><h5>Enter Your Dev.to API Key:</h5></label>
+                    <input class="form-control" type="text" name="api-key" />
+                </div>
+                {% if field.help_text %}
+                    <small>{{field.help_text}}</small>
+                {% endif %}
 
+                {% for error in field.errors %}
+                    <p style="color: red;">{{ error }}</p>
+                {% endfor %}
+                <div class="m-4">
+                    <input class="btn btn-dark btn-lg" type="submit" value="Submit" />
+                    <a class="btn btn-dark btn-lg" href="{% url 'home' %}">Cancel</a>
+                </div>
+            </form>
 
         {% endif %}
-
-        <div class="m-4">
-            <p>Already have an Account?<a href="{% url 'login' %}"> Sign In</a></p>
-        </div>
+        
+        {% if request.path != "/update-profile/" %}
+            <div class="m-4">
+                <p>Already have an Account?<a href="{% url 'login' %}"> Sign In</a></p>
+            </div>
+        {% endif %}
     </div>
 </div>
 
