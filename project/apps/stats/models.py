@@ -55,6 +55,9 @@ class Articles(models.Model):
     date_added = models.DateTimeField(auto_now_add = True, 
                                       null = False, 
                                       blank = False)
+    tags = models.ManyToManyField(to = Tags,
+                                  blank = True, 
+                                  null=True)
     
     def __str__(self):
         """_summary_
