@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'apps.users',
+    'apps.stats',
 ]
 
 MIDDLEWARE = [
@@ -203,5 +204,3 @@ MESSAGE_TAGS = {
         messages.WARNING: 'alert-warning',
         messages.ERROR: 'alert-danger',
  }
-
-# %(levelname)s:%(asctime)s:%(name)s:%(message)s
