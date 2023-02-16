@@ -82,9 +82,11 @@ class ArticleLikes(models.Model):
                                                     blank = True, 
                                                     on_delete = models.SET_NULL)    
     change = models.IntegerField(null = False,
-                                 blank = False)
+                                 blank = False,
+                                 default = 0)
     count = models.IntegerField(null = False,
-                                blank = False)
+                                blank = False,
+                                default = 0)
     date_added = models.DateTimeField(auto_now_add = True, 
                                       null = False, 
                                       blank = False)
@@ -113,9 +115,11 @@ class ArticleComments(models.Model):
                                                        blank = True, 
                                                        on_delete = models.SET_NULL)    
     change = models.IntegerField(null = False,
-                                 blank = False)
+                                 blank = False,
+                                 default = 0)
     count = models.IntegerField(null = False,
-                                blank = False)
+                                blank = False,
+                                default = 0)
     date_added = models.DateTimeField(auto_now_add = True, 
                                       null = False, 
                                       blank = False)
