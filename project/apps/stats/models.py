@@ -68,3 +68,38 @@ class Articles(models.Model):
         
         # --- title is returned from the articles table:
         return str(self.title)
+    
+
+class ArticleLikes(models.Model):
+    
+    """This is the model for storing the articles that are collected from the blog site"""
+    
+    article_likes_id = models.UUIDField(primary_key = True, 
+                                        default = uuid.uuid4, 
+                                        unique = True, 
+                                        editable = False)
+    article_likes_article_id_fk = models.ForeignKey(to = User, 
+                                                    null = True, 
+                                                    blank = True, 
+                                                    on_delete = models.SET_NULL)    
+    change = models.IntegerField(max_length = 1000000,
+                                 null = False,
+                                 blank = False)
+    count = models.IntegerField(max_length = 1000000,
+                                null = False,
+                                blank = False)
+    date_added = models.DateTimeField(auto_now_add = True, 
+                                      null = False, 
+                                      blank = False)
+
+    def __str__(self):
+        """_summary_
+            This returns a string representation of the count in the admin panel for a row, rather than the object description.
+        Returns:
+            This returns a string representation of the count in the admin panel for a row, rather than the object description.
+        """
+        
+        # --- title is returned from the articles table:
+        return str(self.count)
+    
+
