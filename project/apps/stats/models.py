@@ -56,8 +56,7 @@ class Articles(models.Model):
                                       null = False, 
                                       blank = False)
     tags = models.ManyToManyField(to = Tags,
-                                  blank = True, 
-                                  null=True)
+                                  blank = True)
     
     def __str__(self):
         """_summary_
@@ -82,11 +81,9 @@ class ArticleLikes(models.Model):
                                                     null = True, 
                                                     blank = True, 
                                                     on_delete = models.SET_NULL)    
-    change = models.IntegerField(max_length = 1000000,
-                                 null = False,
+    change = models.IntegerField(null = False,
                                  blank = False)
-    count = models.IntegerField(max_length = 1000000,
-                                null = False,
+    count = models.IntegerField(null = False,
                                 blank = False)
     date_added = models.DateTimeField(auto_now_add = True, 
                                       null = False, 
@@ -115,11 +112,9 @@ class ArticleComments(models.Model):
                                                        null = True, 
                                                        blank = True, 
                                                        on_delete = models.SET_NULL)    
-    change = models.IntegerField(max_length = 1000000,
-                                 null = False,
+    change = models.IntegerField(null = False,
                                  blank = False)
-    count = models.IntegerField(max_length = 1000000,
-                                null = False,
+    count = models.IntegerField(null = False,
                                 blank = False)
     date_added = models.DateTimeField(auto_now_add = True, 
                                       null = False, 
