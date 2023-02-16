@@ -1,6 +1,10 @@
 from django.contrib import admin
+from .models import Articles, ArticleComments, ArticleLikes, Tags
 
-# Register your models here.
-class Stats(AppConfig):
-    default_auto_field = 'django.db.models.BigAutoField'
-    name = 'apps.stats'
+
+# --- Register your models here.
+
+admin.site.register(Articles)
+admin.site.register(ArticleComments)
+admin.site.register(ArticleLikes)
+admin.site.register(Tags)
