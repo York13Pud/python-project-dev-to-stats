@@ -2,7 +2,7 @@
 import requests
 
 
-def get_published_articles(api_key:str, api_endpoint:str):
+def get_published_articles(api_key:str, api_endpoint: str):
     """Function:
 
     Makes an API call to dev.to which pulls the list of published articles for your account.
@@ -18,8 +18,9 @@ def get_published_articles(api_key:str, api_endpoint:str):
     headers = {"api-key": api_key,
                "Accept": "application/vnd.forem.api-v1+json"}
 
-    params = {}
-
+    params = {"per_page": 1000}
+    
+    # --- Endpoint is: https://dev.to/api/articles/me/published?per_page=1000
     URL = api_endpoint
     
     # --- Execute an API GET request to the API:
@@ -29,6 +30,8 @@ def get_published_articles(api_key:str, api_endpoint:str):
                             headers = headers)
 
     response_json = response.json()
-    response_json["response"] = response.status_code
+    response_status_code = response.status_code
+    # print(response.status_code)
+    #response_json["response"] = response.status_code
     
-    return response_json
+    return [response_json, response_status_code]
