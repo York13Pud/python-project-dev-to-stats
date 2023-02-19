@@ -13,4 +13,15 @@
 # --- Query article ref ID against each article in API JSON / Pandas return:
 
 
-# --- Query tags table to collect all tag names:
+# --- call function to query tags table to collect all tag names:
+
+
+# --- Call function to check article tags:
+
+
+# --- Once tag check is completed, call function to query tags table to collect all tag names
+# --- and add article to articles table.
+# --- Then add the tags / article to the article_tags table where needed:
+
+
+# --- Problem on diagram: The orange functions don't run after an article is added.
