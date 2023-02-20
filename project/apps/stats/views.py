@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 
 
 from .modules.dev_to_api_articles import get_published_articles
-
+from .modules.dev_to_process_data import testing_function
 
 import environ
 
@@ -29,3 +29,11 @@ def process_published_articles(request):
     print(published_articles)
     
     return redirect(to = "home")
+
+
+@login_required(login_url = "login")
+def testing(request):
+    data = testing_function()
+
+    return redirect(to = "home")
+    
