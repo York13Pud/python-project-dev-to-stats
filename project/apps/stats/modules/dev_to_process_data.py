@@ -1,27 +1,29 @@
 # --- Import required modules and libraries:
+from .db_functions import get_all_articles
+
+def testing_function():
+    # --- Make API call to collect published articles:
 
 
-# --- Make API call to collect published articles:
+    # --- Check for a HTTP 200 response. If not 200, log and end process:
 
 
-# --- Check for a HTTP 200 response. If not 200, log and end process:
+    # --- Call function to query articles table to collect all articles:
+    all_articles = get_all_articles()
+    print(all_articles)
+    
+    # --- Query article ref ID against each article in API JSON / Pandas return:
 
 
-# --- Call function to query articles table to collect all articles:
+    # --- call function to query tags table to collect all tag names:
 
 
-# --- Query article ref ID against each article in API JSON / Pandas return:
+    # --- Call function to check article tags:
 
 
-# --- call function to query tags table to collect all tag names:
+    # --- Once tag check is completed, call function to query tags table to collect all tag names
+    # --- and add article to articles table.
+    # --- Then add the tags / article to the article_tags table where needed:
 
 
-# --- Call function to check article tags:
-
-
-# --- Once tag check is completed, call function to query tags table to collect all tag names
-# --- and add article to articles table.
-# --- Then add the tags / article to the article_tags table where needed:
-
-
-# --- Problem on diagram: The orange functions don't run after an article is added.
+    # --- Problem on diagram: The orange functions don't run after an article is added.
