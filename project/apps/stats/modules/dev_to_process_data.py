@@ -1,5 +1,5 @@
 # --- Import required modules and libraries:
-from .db_functions import get_all_articles
+from .db_functions import get_all_articles, get_all_tags, check_tag
 
 def testing_function():
     # --- Make API call to collect published articles:
@@ -16,14 +16,20 @@ def testing_function():
 
 
     # --- call function to query tags table to collect all tag names:
-
+    all_tags = get_all_tags()
+    print(all_tags)
 
     # --- Call function to check article tags:
-
+    tags_to_check = [{"name": "Python"},
+                     {"name": "JavaScript"},
+                     {"name": "C#"}]
+    
+    tag_check = check_tag(tags_to_check = tags_to_check, current_tags = all_tags)
+    print(tag_check)
 
     # --- Once tag check is completed, call function to query tags table to collect all tag names
+    all_tags = get_all_tags()
+    print(all_tags)
+    
     # --- and add article to articles table.
     # --- Then add the tags / article to the article_tags table where needed:
-
-
-    # --- Problem on diagram: The orange functions don't run after an article is added.
