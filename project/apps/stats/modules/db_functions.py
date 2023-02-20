@@ -6,14 +6,34 @@ def get_all_articles():
     Collects all of the articles from the articles table.
     
     Returns:
-        _type_: _description_
+        queryset: all articles in the articles table
     """
     
-    print("start")
+    try:
+        all_articles = Articles.objects.all()
+        
+    except:
+        error_msg = "error"
+        return error_msg
     
-    all_articles = Articles.objects.all()
+    else:
+        return all_articles
+
+
+def get_all_tags():
+    """_summary_
+    Collects all of the tags from the tags table.
     
-    print(type(all_articles))
+    Returns:
+        queryset: all tags in the tags table
+    """
     
-    return all_articles
+    try:
+        all_tags = Tags.objects.all()
+        
+    except:
+        error_msg = "error"
+        return error_msg
     
+    else:
+        return all_tags
