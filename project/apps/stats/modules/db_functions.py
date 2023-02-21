@@ -84,11 +84,11 @@ def get_all_articles():
     """
     
     try:
-        all_articles = Articles.objects.all()
+        all_articles = Articles.objects.values_list("reference_id" ,flat = True)
         
-    except:
-        error_msg = "error"
-        return error_msg
+    except Exception as error_message:
+        
+        return error_message
     
     else:
         return all_articles
