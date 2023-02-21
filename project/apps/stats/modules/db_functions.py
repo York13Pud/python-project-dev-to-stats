@@ -40,12 +40,27 @@ def get_all_tags():
     
     
 def add_tag(tag_to_add: str):
-    data = tag_to_add
-    tag_to_create = Tags.objects.create(name = data)
-    return f"Added tag {data}"
+    """_summary_
+    This function will take the name of a tag and add it to the Tags table in the database.
+    
+    Args:
+        tag_to_add (str): The tag that needs to be added.
+
+    Returns:
+        String: Either an error is returned or an added tag message is returned.
+    """
+    
+    try:    
+        Tags.objects.create(name = tag_to_add)
+        
+    except:
+        return "Error"
+    
+    else:    
+        return f"Added tag {tag_to_add}"
 
 
-def check_tag(tags_to_check: list, current_tags: list):
+def check_tag(tags_to_check: list):
     """_summary_
     This function will take a list of tags from an article and search through a 
     list of tags that are currently stored in the Tags table. 
@@ -60,22 +75,21 @@ def check_tag(tags_to_check: list, current_tags: list):
     Returns:
         str: A general response to indicate the function is completed.
     """
-        
+    
+    current_tags = get_all_tags()
+    
     for tag_to_check in tags_to_check:
-        # print("Stage 1")
         print(f"Checking: {tag_to_check['name']}")
         
         if tag_to_check["name"] in current_tags:
-            # print("Stage 2")
             print(f"{tag_to_check['name']} is present")
+            
         else:
-            # print("Stage 3")
             print(f"{tag_to_check['name']} is not present")
-            # print("Stage 4")
             add_tag(tag_to_add = tag_to_check["name"])
             print(f"{tag_to_check['name']} added")
                 
-    return "tag checking done"
+    return "tag checking completed"
 
 
 # http://127.0.0.1:8000/stats/testing/
