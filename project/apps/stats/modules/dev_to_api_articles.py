@@ -1,5 +1,6 @@
 # --- Import the required libraries:
 import requests
+import json
 
 
 def get_published_articles(api_key:str, api_endpoint: str):
@@ -28,10 +29,9 @@ def get_published_articles(api_key:str, api_endpoint: str):
     response = requests.get(url = URL, 
                             params = params, 
                             headers = headers)
-
-    response_json = response.json()
-    response_status_code = response.status_code
-    # print(response.status_code)
-    #response_json["response"] = response.status_code
     
-    return [response_json, response_status_code]
+    response_data = json.dumps(response.json())
+    
+    response_status_code = response.status_code
+    
+    return [response_data, response_status_code]
