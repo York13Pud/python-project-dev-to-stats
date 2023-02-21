@@ -41,9 +41,8 @@ class Articles(models.Model):
                                            null = True, 
                                            blank = True, 
                                            on_delete = models.SET_NULL)
-    reference_id = models.TextField(max_length = 50, 
-                                    null = False, 
-                                    blank = False)
+    reference_id = models.IntegerField(null = False, 
+                                       blank = False)
     title = models.TextField(max_length = 200,
                              null = False, 
                              blank = False)
