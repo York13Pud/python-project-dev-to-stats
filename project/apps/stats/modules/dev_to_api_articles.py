@@ -1,6 +1,6 @@
 # --- Import the required libraries:
-import requests
 import json
+import requests
 
 
 def get_published_articles(api_key:str, api_endpoint: str):
@@ -19,6 +19,7 @@ def get_published_articles(api_key:str, api_endpoint: str):
     headers = {"api-key": api_key,
                "Accept": "application/vnd.forem.api-v1+json"}
 
+    # --- 
     params = {"per_page": 1000}
     
     # --- Endpoint is: https://dev.to/api/articles/me/published?per_page=1000
@@ -26,11 +27,13 @@ def get_published_articles(api_key:str, api_endpoint: str):
     
     # --- Execute an API GET request to the API:
     
-    response = requests.get(url = URL, 
+    response = requests.request("GET", url = URL, 
                             params = params, 
                             headers = headers)
+
+    response_text = response.text
     
-    response_data = json.dumps(response.json())
+    response_data = json.loads(response_text)
     
     response_status_code = response.status_code
     
