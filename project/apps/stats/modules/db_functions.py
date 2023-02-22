@@ -11,9 +11,11 @@ def get_all_tags():
     """
     
     try:
+        # --- Get all of the tag names:
         all_tags = Tags.objects.values_list('name', flat = True)
         
     except:
+        # # # # Change this to a log entry:
         error_msg = "error"
         return error_msg
     
@@ -33,12 +35,15 @@ def add_tag(tag_to_add: str):
     """
     
     try:    
+        # --- Add a tag to the tags table:
         Tags.objects.create(name = tag_to_add)
         
     except:
+        # # # # Change this to a log entry:
         return "Error"
     
     else:    
+        # # # # Change this to a log entry:
         return f"Added tag {tag_to_add}"
 
 
@@ -61,13 +66,15 @@ def check_tag(tags_to_check: list):
     current_tags = get_all_tags()
     
     for tag_to_check in tags_to_check:
+        # # # # Change this to a log entry:
         print(f"Checking: {tag_to_check['name']}")
         
         if tag_to_check["name"] in current_tags:
+            # # # # Change this to a log entry:
             print(f"{tag_to_check['name']} is present")
-            #print(f"{current_tags['id']}")
             
         else:
+            # # # # Change this to a log entry:
             print(f"{tag_to_check['name']} is not present")
             add_tag(tag_to_add = tag_to_check["name"])
             print(f"{tag_to_check['name']} added")
@@ -84,10 +91,11 @@ def get_all_articles():
     """
     
     try:
+        # --- Get all of the articles reference_id's:
         all_articles = Articles.objects.values_list("reference_id" ,flat = True)
         
     except Exception as error_message:
-        
+        # # # # Change this to a log entry:
         return error_message
     
     else:
@@ -144,29 +152,37 @@ def add_article():
     
     
     try:
+        # --- Create a new article in the articles table:
         article = Articles.objects.create(
             reference_id = article_details["id"],
             title = article_details["title"],
-            is_published = article_details["published".capitalize],
+            is_published = article_details["published"],
             published_date = article_details["published_at"], 
-            url = article_details["url"]
+            url = article_details["url"],
+            article_user_id_fk_id = 2,
         )
     
     except Exception as error_message:
+        # # # # Change this to a log entry:
         print(f"Error: {error_message}")
     
     else:
+        # --- Add each tag in the article to the article_tags table:
         for tag in article_details["tag_list"]:
             
             try:
+                # --- Get the tag from the Tags table and add it to the
+                # --- article_tags table
                 tag_ref_id = Tags.objects.get(name = tag)      
                 article.tags.add(tag_ref_id.tag_id)
 
             except Exception as error_message:
+                # # # # Change this to a log entry:
                 print(f"Error: {error_message}")
             
-            else:   
-                print(f"Added tag {tag}")
+            else:
+                # # # # Change this to a log entry:
+                print(f"Added tag {tag} to article {article_details['id']}")
                 
     return "Article added successfully"
 
