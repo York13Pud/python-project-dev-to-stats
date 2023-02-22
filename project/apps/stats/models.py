@@ -76,7 +76,7 @@ class ArticleLikes(models.Model):
                                         default = uuid.uuid4, 
                                         unique = True, 
                                         editable = False)
-    article_likes_article_id_fk = models.ForeignKey(to = User, 
+    article_likes_article_id_fk = models.ForeignKey(Articles, 
                                                     null = True, 
                                                     blank = True, 
                                                     on_delete = models.SET_NULL)    
@@ -109,7 +109,7 @@ class ArticleComments(models.Model):
                                            default = uuid.uuid4, 
                                            unique = True, 
                                            editable = False)
-    article_comments_article_id_fk = models.ForeignKey(to = User, 
+    article_comments_article_id_fk = models.ForeignKey(Articles, 
                                                        null = True, 
                                                        blank = True, 
                                                        on_delete = models.SET_NULL)    
