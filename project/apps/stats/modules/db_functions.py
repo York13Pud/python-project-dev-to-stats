@@ -106,6 +106,17 @@ def get_all_articles():
 
 
 def add_article_views_count(article_id: str, article_views: int):
+    """_summary_
+    This function will add the number of views and the difference from the last
+    record in the database for a given article.
+    
+    Args:
+        article_id (str): The article id to use. It will be a UUID.
+        article_views (int): The number of views from the article.
+
+    Returns:
+        str: A message indicating the completion of the function.
+    """
     
     # --- Get the name of the function that called this one@
     calling_function = stack()[1][3]
@@ -121,10 +132,10 @@ def add_article_views_count(article_id: str, article_views: int):
     # --- perform the steps in the if statement:
     if calling_function != "add_article":
         # --- Get the last entry in the article_views table:
-        last_article_view_count = ArticleViews.objects.filter(article_views_article_id_fk = article_id).latest("date_added")
+        last_article_views_count = ArticleViews.objects.filter(article_views_article_id_fk = article_id).latest("date_added")
         
         # --- Determine difference between last and new count
-        difference_count = int(count - last_article_view_count.count)
+        difference_count = int(count - last_article_views_count.count)
     
     # --- Perform the creation of an entry into the article_views table:
     try:
@@ -134,25 +145,103 @@ def add_article_views_count(article_id: str, article_views: int):
         
     except Exception as error_message:
         # # # # Change this to a log entry:
-        return f"Error: {error_message}"
+        return f"Error: add_article_views_count: {error_message}"
     
     else:   
         return "completed"
 
 
+def add_article_likes_count(article_id: str, article_likes: int):
+    """_summary_
+    This function will add the number of likes and the difference from the last
+    record in the database for a given article.
+    
+    Args:
+        article_id (str): The article id to use. It will be a UUID.
+        article_likes (int): The number of likes from the article.
+
+    Returns:
+        str: A message indicating the completion of the function.
+    """
+    
+    # --- Get the name of the function that called this one@
+    calling_function = stack()[1][3]
+    
+    # --- Convert the article_id to a string as it will come through as a UUID type:
+    article_id = str(article_id)
+    
+    # --- Set the values for the count and difference count:
+    count = int(article_likes)
+    difference_count = int(0)
+    
+    # --- Check if the calling function is not named "add_article". If it isn't, 
+    # --- perform the steps in the if statement:
+    if calling_function != "add_article":
+        # --- Get the last entry in the article_views table:
+        last_article_likes_count = ArticleViews.objects.filter(article_likes_article_id_fk = article_id).latest("date_added")
+        
+        # --- Determine difference between last and new count
+        difference_count = int(count - last_article_likes_count.count)
+    
+    # --- Perform the creation of an entry into the article_views table:
+    try:
+        ArticleLikes.objects.create(article_likes_article_id_fk = Articles.objects.get(article_id = article_id),
+                                    count = count,
+                                    change = difference_count)
+        
+    except Exception as error_message:
+        # # # # Change this to a log entry:
+        print(f"Error: add_article_likes_count: {error_message}")
+        return f"Error: add_article_likes_count: {error_message}"
+    
+    else:   
+        return "completed"
 
 
+def add_article_comments_count(article_id: str, article_comments: int):
+    """_summary_
+    This function will add the number of comments and the difference from the last
+    record in the database for a given article.
+    
+    Args:
+        article_id (str): The article id to use. It will be a UUID.
+        article_comments (int): The number of views from the article.
 
-
-
-
-
-def add_article_likes_count():
-    pass
-
-
-def add_article_comments_count():
-    pass
+    Returns:
+        str: A message indicating the completion of the function.
+    """
+    
+    # --- Get the name of the function that called this one@
+    calling_function = stack()[1][3]
+    
+    # --- Convert the article_id to a string as it will come through as a UUID type:
+    article_id = str(article_id)
+    
+    # --- Set the values for the count and difference count:
+    count = int(article_comments)
+    difference_count = int(0)
+    
+    # --- Check if the calling function is not named "add_article". If it isn't, 
+    # --- perform the steps in the if statement:
+    if calling_function != "add_article":
+        # --- Get the last entry in the article_views table:
+        last_article_comments_count = ArticleComments.objects.filter(article_comments_article_id_fk = article_id).latest("date_added")
+        
+        # --- Determine difference between last and new count
+        difference_count = int(count - last_article_comments_count.count)
+    
+    # --- Perform the creation of an entry into the article_views table:
+    try:
+        ArticleComments.objects.create(article_comments_article_id_fk = Articles.objects.get(article_id = article_id),
+                                       count = count,
+                                       change = difference_count)
+        
+    except Exception as error_message:
+        # # # # Change this to a log entry:
+        return f"Error: add_article_comments_count: {error_message}"
+    
+    else:   
+        return "completed"
     
 
 def add_article():
@@ -242,11 +331,10 @@ def add_article():
     add_article_views_count(article_id = article.article_id,
                             article_views = article_details["page_views_count"])
     
+    add_article_likes_count(article_id = article.article_id,
+                            article_likes = article_details["public_reactions_count"])
     
-    # add_article_likes_count(article_id = article["id"],
-    #                         article_likes = article_details["public_reactions_count"])
-    
-    # add_article_comments_count(article_id = article["id"],
-    #                            article_comments = article_details["comments_count"])
+    add_article_comments_count(article_id = article.article_id,
+                               article_comments = article_details["comments_count"])
                 
     return f"Article \"{article.title}\" added successfully"
