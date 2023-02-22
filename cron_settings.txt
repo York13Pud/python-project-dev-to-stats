@@ -1,0 +1,2 @@
+# --- run at 30 minutes past every hour
+30 * * * *
