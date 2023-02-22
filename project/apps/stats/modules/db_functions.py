@@ -102,6 +102,18 @@ def get_all_articles():
         return all_articles
 
 
+def add_article_views_count():
+    pass
+
+
+def add_article_likes_count():
+    pass
+
+
+def add_article_comments_count():
+    pass
+    
+
 def add_article():
     """_summary_
     This function will take the name of a tag and add it to the Tags table in the database.
@@ -183,6 +195,14 @@ def add_article():
             else:
                 # # # # Change this to a log entry:
                 print(f"Added tag {tag} to article {article_details['id']}")
+    
+    add_article_views_count(article_id = article["id"],
+                            article_likes = article_details["page_views_count"])
+    
+    add_article_likes_count(article_id = article["id"],
+                            article_likes = article_details["public_reactions_count"])
+    
+    add_article_comments_count(article_id = article["id"],
+                               article_likes = article_details["comments_count"])
                 
     return "Article added successfully"
-
