@@ -1,5 +1,8 @@
 # --- Import required modules and libraries:
-from ..models import Articles, ArticleLikes, ArticleComments, Tags
+from inspect import stack
+
+
+from ..models import Articles, ArticleComments, ArticleLikes, ArticleViews, Tags
 
 
 def get_all_tags():
@@ -102,8 +105,46 @@ def get_all_articles():
         return all_articles
 
 
-def add_article_views_count():
-    pass
+def add_article_views_count(article_id: str, article_views: int):
+    
+    # --- Get the name of the function that called this one@
+    calling_function = stack()[1][3]
+    
+    # --- Convert the article_id to a string as it will come through as a UUID type:
+    article_id = str(article_id)
+    
+    # --- Set the values for the count and difference count:
+    count = int(article_views)
+    difference_count = int(0)
+    
+    # --- Check if the calling function is not named "add_article". If it isn't, 
+    # --- perform the steps in the if statement:
+    if calling_function != "add_article":
+        # --- Get the last entry in the article_views table:
+        last_article_view_count = ArticleViews.objects.filter(article_views_article_id_fk = article_id).latest("date_added")
+        
+        # --- Determine difference between last and new count
+        difference_count = int(count - last_article_view_count.count)
+    
+    # --- Perform the creation of an entry into the article_views table:
+    try:
+        ArticleViews.objects.create(article_views_article_id_fk = Articles.objects.get(article_id = article_id),
+                                    count = count,
+                                    change = difference_count)
+        
+    except Exception as error_message:
+        # # # # Change this to a log entry:
+        return f"Error: {error_message}"
+    
+    else:   
+        return "completed"
+
+
+
+
+
+
+
 
 
 def add_article_likes_count():
@@ -180,12 +221,13 @@ def add_article():
     
     else:
         # --- Add each tag in the article to the article_tags table:
+        
         for tag in article_details["tag_list"]:
             
             try:
                 # --- Get the tag from the Tags table and add it to the
-                # --- article_tags table
-                tag_ref_id = Tags.objects.get(name = tag)      
+                # --- article_tags table     
+                tag_ref_id = Tags.objects.get(name = tag)
                 article.tags.add(tag_ref_id.tag_id)
 
             except Exception as error_message:
@@ -195,14 +237,16 @@ def add_article():
             else:
                 # # # # Change this to a log entry:
                 print(f"Added tag {tag} to article {article_details['id']}")
+
+
+    add_article_views_count(article_id = article.article_id,
+                            article_views = article_details["page_views_count"])
     
-    add_article_views_count(article_id = article["id"],
-                            article_likes = article_details["page_views_count"])
     
-    add_article_likes_count(article_id = article["id"],
-                            article_likes = article_details["public_reactions_count"])
+    # add_article_likes_count(article_id = article["id"],
+    #                         article_likes = article_details["public_reactions_count"])
     
-    add_article_comments_count(article_id = article["id"],
-                               article_likes = article_details["comments_count"])
+    # add_article_comments_count(article_id = article["id"],
+    #                            article_comments = article_details["comments_count"])
                 
-    return "Article added successfully"
+    return f"Article \"{article.title}\" added successfully"
