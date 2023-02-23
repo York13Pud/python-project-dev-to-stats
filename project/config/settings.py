@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_q',
     'apps.users',
     'apps.stats',
 ]
@@ -204,3 +205,10 @@ MESSAGE_TAGS = {
         messages.WARNING: 'alert-warning',
         messages.ERROR: 'alert-danger',
  }
+
+# --- Configure your Q cluster
+# --- More details https://django-q.readthedocs.io/en/latest/configure.html
+Q_CLUSTER = {
+    "name": "dev_to_stats",
+    "orm": "default",  # Use Django's ORM + database for broker
+}
