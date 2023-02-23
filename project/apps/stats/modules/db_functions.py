@@ -245,7 +245,7 @@ def add_article_comments_count(article_ref_id: int, article_comments: int):
         return "completed"
     
 
-def add_article(article):
+def add_article(article, user_id:int):
     """_summary_
     This function will take the name of a tag and add it to the Tags table in the database.
     
@@ -266,7 +266,7 @@ def add_article(article):
             is_published = article_details["published"],
             published_date = article_details["published_at"], 
             url = article_details["url"],
-            article_user_id_fk_id = 2,
+            article_user_id_fk_id = user_id,
         )
     
     except Exception as error_message:

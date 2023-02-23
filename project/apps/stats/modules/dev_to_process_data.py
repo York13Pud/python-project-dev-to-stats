@@ -55,4 +55,4 @@ def process_data():
                         check_tag(tags_to_check = tags_to_check)
                         
                         # # --- Finally, call the add article to articles table.
-                        add_article(article = published_article)
+                        add_article(article = published_article, user_id = user.id)
