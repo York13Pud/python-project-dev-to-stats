@@ -70,17 +70,17 @@ def check_tag(tags_to_check: list):
     
     for tag_to_check in tags_to_check:
         # # # # Change this to a log entry:
-        print(f"Checking: {tag_to_check['name']}")
+        print(f"Checking: {tag_to_check}")
         
-        if tag_to_check["name"] in current_tags:
+        if tag_to_check in current_tags:
             # # # # Change this to a log entry:
-            print(f"{tag_to_check['name']} is present")
+            print(f"{tag_to_check} is present")
             
         else:
             # # # # Change this to a log entry:
-            print(f"{tag_to_check['name']} is not present")
-            add_tag(tag_to_add = tag_to_check["name"])
-            print(f"{tag_to_check['name']} added")
+            print(f"{tag_to_check} is not present")
+            add_tag(tag_to_add = tag_to_check)
+            print(f"{tag_to_check} added")
                 
     return "tag checking completed"
 
@@ -95,7 +95,7 @@ def get_all_articles():
     
     try:
         # --- Get all of the articles reference_id's:
-        all_articles = Articles.objects.values_list("reference_id" ,flat = True)
+        all_articles = Articles.objects.values_list("reference_id", flat=True)
         
     except Exception as error_message:
         # # # # Change this to a log entry:
