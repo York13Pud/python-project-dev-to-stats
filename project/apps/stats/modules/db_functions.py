@@ -17,10 +17,9 @@ def get_all_tags():
         # --- Get all of the tag names:
         all_tags = Tags.objects.values_list('name', flat = True)
         
-    except:
+    except Exception as error_message:
         # # # # Change this to a log entry:
-        error_msg = "error"
-        return error_msg
+        return error_message
     
     else:
         return all_tags
@@ -41,9 +40,9 @@ def add_tag(tag_to_add: str):
         # --- Add a tag to the tags table:
         Tags.objects.create(name = tag_to_add)
         
-    except:
+    except Exception as error_message:
         # # # # Change this to a log entry:
-        return "Error"
+        return error_message
     
     else:    
         # # # # Change this to a log entry:
@@ -78,9 +77,9 @@ def check_tag(tags_to_check: list):
             
         else:
             # # # # Change this to a log entry:
-            print(f"{tag_to_check} is not present")
+            #print(f"{tag_to_check} is not present")
             add_tag(tag_to_add = tag_to_check)
-            print(f"{tag_to_check} added")
+            #print(f"{tag_to_check} added")
                 
     return "tag checking completed"
 
@@ -95,7 +94,7 @@ def get_all_articles():
     
     try:
         # --- Get all of the articles reference_id's:
-        all_articles = Articles.objects.values_list("reference_id", flat=True)
+        all_articles = Articles.objects.values_list("reference_id", flat = True)
         
     except Exception as error_message:
         # # # # Change this to a log entry:
@@ -105,13 +104,13 @@ def get_all_articles():
         return all_articles
 
 
-def add_article_views_count(article_id: str, article_views: int):
+def add_article_views_count(article_ref_id: int, article_views: int):
     """_summary_
     This function will add the number of views and the difference from the last
     record in the database for a given article.
     
     Args:
-        article_id (str): The article id to use. It will be a UUID.
+        article_ref_id (int): The article ref id to use.
         article_views (int): The number of views from the article.
 
     Returns:
@@ -121,8 +120,9 @@ def add_article_views_count(article_id: str, article_views: int):
     # --- Get the name of the function that called this one@
     calling_function = stack()[1][3]
     
-    # --- Convert the article_id to a string as it will come through as a UUID type:
-    article_id = str(article_id)
+    # --- Get the article_od from the reference_id that was passed as an argument:
+    article = Articles.objects.get(reference_id = article_ref_id)
+    article_id = article.article_id
     
     # --- Set the values for the count and difference count:
     count = int(article_views)
@@ -151,13 +151,13 @@ def add_article_views_count(article_id: str, article_views: int):
         return "completed"
 
 
-def add_article_likes_count(article_id: str, article_likes: int):
+def add_article_likes_count(article_ref_id:int, article_likes: int):
     """_summary_
     This function will add the number of likes and the difference from the last
     record in the database for a given article.
     
     Args:
-        article_id (str): The article id to use. It will be a UUID.
+        article_ref_id (int): The article ref id to use.
         article_likes (int): The number of likes from the article.
 
     Returns:
@@ -167,8 +167,9 @@ def add_article_likes_count(article_id: str, article_likes: int):
     # --- Get the name of the function that called this one@
     calling_function = stack()[1][3]
     
-    # --- Convert the article_id to a string as it will come through as a UUID type:
-    article_id = str(article_id)
+    # --- Get the article_id from the reference_id that was passed as an argument:
+    article = Articles.objects.get(reference_id = article_ref_id)
+    article_id = article.article_id
     
     # --- Set the values for the count and difference count:
     count = int(article_likes)
@@ -178,7 +179,7 @@ def add_article_likes_count(article_id: str, article_likes: int):
     # --- perform the steps in the if statement:
     if calling_function != "add_article":
         # --- Get the last entry in the article_views table:
-        last_article_likes_count = ArticleViews.objects.filter(article_likes_article_id_fk = article_id).latest("date_added")
+        last_article_likes_count = ArticleLikes.objects.filter(article_likes_article_id_fk = article_id).latest("date_added")
         
         # --- Determine difference between last and new count
         difference_count = int(count - last_article_likes_count.count)
@@ -191,20 +192,19 @@ def add_article_likes_count(article_id: str, article_likes: int):
         
     except Exception as error_message:
         # # # # Change this to a log entry:
-        print(f"Error: add_article_likes_count: {error_message}")
         return f"Error: add_article_likes_count: {error_message}"
     
     else:   
         return "completed"
 
 
-def add_article_comments_count(article_id: str, article_comments: int):
+def add_article_comments_count(article_ref_id: int, article_comments: int):
     """_summary_
     This function will add the number of comments and the difference from the last
     record in the database for a given article.
     
     Args:
-        article_id (str): The article id to use. It will be a UUID.
+        article_ref_id (int): The article ref id to use.
         article_comments (int): The number of views from the article.
 
     Returns:
@@ -214,8 +214,9 @@ def add_article_comments_count(article_id: str, article_comments: int):
     # --- Get the name of the function that called this one@
     calling_function = stack()[1][3]
     
-    # --- Convert the article_id to a string as it will come through as a UUID type:
-    article_id = str(article_id)
+    # --- Get the article_id from the reference_id that was passed as an argument:
+    article = Articles.objects.get(reference_id = article_ref_id)
+    article_id = article.article_id
     
     # --- Set the values for the count and difference count:
     count = int(article_comments)
@@ -244,7 +245,7 @@ def add_article_comments_count(article_id: str, article_comments: int):
         return "completed"
     
 
-def add_article():
+def add_article(article):
     """_summary_
     This function will take the name of a tag and add it to the Tags table in the database.
     
@@ -255,43 +256,7 @@ def add_article():
         String: Either an error is returned or an added tag message is returned.
     """
 
-    article_details = {
-        "type_of": "article",
-        "id": 1203386,
-        "title": "What I Learned From Doing The 100 Days of Code Challenge",
-        "description": "Introduction  Lessons Learned   Create A Schedule You Don't Need To Spend A Fortune To Learn Learn...",
-        "published_at": "2022-09-26T12:21:52.632Z",
-        "slug": "what-i-learned-from-doing-the-100-days-of-code-challenge-4md4",
-        "path": "/dev_neil_a/what-i-learned-from-doing-the-100-days-of-code-challenge-4md4",
-        "url": "https://dev.to/dev_neil_a/what-i-learned-from-doing-the-100-days-of-code-challenge-4md4",
-        "published": True,
-        "comments_count": 0,
-        "public_reactions_count": 0,
-        "page_views_count": 42,
-        "published_timestamp": "2022-09-26T12:21:52Z",
-        "body_markdown": "Removed as it's the body of the article",
-        "positive_reactions_count": 0,
-        "cover_image": "https://res.cloudinary.com/practicaldev/image/fetch/s--VgUXsbyq--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/67g2ekfytyhxsrliuynj.jpeg",
-        "tag_list": [
-            "100daysofcode",
-            "python",
-            "javascript",
-            "codenewbie"
-        ],
-        "canonical_url": "https://dev.to/dev_neil_a/what-i-learned-from-doing-the-100-days-of-code-challenge-4md4",
-        "reading_time_minutes": 7,
-        "user": {
-            "name": "dev_neil_a",
-            "username": "dev_neil_a",
-            "twitter_username": "dev_neil_a",
-            "github_username": "York13Pud",
-            "user_id": 857210,
-            "website_url": "https://www.linkedin.com/in/neil-allwood/",
-            "profile_image": "https://res.cloudinary.com/practicaldev/image/fetch/s---Y4hmlhp--/c_fill,f_auto,fl_progressive,h_640,q_auto,w_640/https://dev-to-uploads.s3.amazonaws.com/uploads/user/profile_image/857210/26770d9b-d135-46f0-9439-0ec70428ec63.png",
-            "profile_image_90": "https://res.cloudinary.com/practicaldev/image/fetch/s--SZy6y74T--/c_fill,f_auto,fl_progressive,h_90,q_auto,w_90/https://dev-to-uploads.s3.amazonaws.com/uploads/user/profile_image/857210/26770d9b-d135-46f0-9439-0ec70428ec63.png"
-        }
-    }
-    
+    article_details = article    
     
     try:
         # --- Create a new article in the articles table:
@@ -306,7 +271,7 @@ def add_article():
     
     except Exception as error_message:
         # # # # Change this to a log entry:
-        print(f"Error: {error_message}")
+        return error_message
     
     else:
         # --- Add each tag in the article to the article_tags table:
@@ -321,20 +286,20 @@ def add_article():
 
             except Exception as error_message:
                 # # # # Change this to a log entry:
-                print(f"Error: {error_message}")
+                return error_message
             
             else:
                 # # # # Change this to a log entry:
                 print(f"Added tag {tag} to article {article_details['id']}")
 
 
-    add_article_views_count(article_id = article.article_id,
+    add_article_views_count(article_ref_id = article.reference_id,
                             article_views = article_details["page_views_count"])
     
-    add_article_likes_count(article_id = article.article_id,
+    add_article_likes_count(article_ref_id = article.reference_id,
                             article_likes = article_details["public_reactions_count"])
     
-    add_article_comments_count(article_id = article.article_id,
+    add_article_comments_count(article_ref_id = article.reference_id,
                                article_comments = article_details["comments_count"])
                 
     return f"Article \"{article.title}\" added successfully"
