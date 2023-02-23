@@ -36,5 +36,5 @@ def get_published_articles(api_key:str, api_endpoint: str):
     response_data = json.loads(response_text)
     
     response_status_code = response.status_code
-    
+
     return [response_data, response_status_code]
