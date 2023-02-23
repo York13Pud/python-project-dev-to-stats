@@ -7,6 +7,8 @@ from django.shortcuts import render, redirect
 from .modules.dev_to_api_articles import get_published_articles
 from .modules.dev_to_process_data import testing_function
 
+from ..users.models import User
+
 import environ
 
 # --- Create your views here.
@@ -36,4 +38,3 @@ def testing(request):
     data = testing_function()
 
     return redirect(to = "home")
-    
