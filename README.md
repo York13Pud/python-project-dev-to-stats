@@ -16,3 +16,7 @@ Each article will be polled hourly to give a granular hourly change tracking alt
 ## Instructions
 
 To be added later.
+
+## Status
+
+This project is currently on hold (24-02-2023). The reason is that a test instance has been deployed to collect data for the next two months so that there is a good sample size to work with in the next phase, which will be the visualisation of the data.
