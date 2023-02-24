@@ -1,0 +1,11 @@
+[Unit]
+Description=dev.to stats collector
+
+[Service]
+User=neil
+WorkingDirectory=/home/neil/python-project-dev-to-stats
+ExecStart=/home/neil/python-project-dev-to-stats/service.sh
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
