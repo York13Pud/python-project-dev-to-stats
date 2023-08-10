@@ -165,3 +165,39 @@ class ArticleViews(models.Model):
         
         # --- count is returned from the articles comments table:
         return str(self.count)
+    
+
+class Followers(models.Model):
+    """This is the model for storing the follower count that is collected from the blog site"""
+    
+    follower_id = models.UUIDField(primary_key = True, 
+                                   default = uuid.uuid4, 
+                                   unique = True, 
+                                   editable = False)
+    
+    article_user_id_fk = models.ForeignKey(to = User, 
+                                           null = True, 
+                                           blank = True, 
+                                           on_delete = models.SET_NULL)
+   
+    change = models.IntegerField(null = False,
+                                 blank = False,
+                                 default = 0)
+    
+    count = models.IntegerField(null = False,
+                                blank = False,
+                                default = 0)
+    
+    date_added = models.DateTimeField(auto_now_add = True, 
+                                      null = False, 
+                                      blank = False)
+    
+    def __str__(self):
+        """_summary_
+            This returns a string representation of the follower count in the admin panel for a row, rather than the object description.
+        Returns:
+            This returns a string representation of the follower count in the admin panel for a row, rather than the object description.
+        """
+        
+        # --- title is returned from the articles table:
+        return str(self.count)
