@@ -211,4 +211,6 @@ MESSAGE_TAGS = {
 Q_CLUSTER = {
     "name": "dev_to_stats",
     "orm": "default",  # Use Django's ORM + database for broker
+    'timeout': 5,
+    'retry': 10,
 }
