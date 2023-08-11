@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 
 
 from .modules.dev_to_api_articles import get_published_articles
-from .modules.dev_to_process_data import process_data
+from .modules.dev_to_process_data import process_data, process_followers_data
 
 from ..users.models import User
 
@@ -36,5 +36,12 @@ def process_published_articles(request):
 @login_required(login_url = "login")
 def testing(request):
     data = process_data()
+
+    return redirect(to = "home")
+
+
+@login_required(login_url = "login")
+def get_follower_count(request):
+    data = process_followers_data()
 
     return redirect(to = "home")
