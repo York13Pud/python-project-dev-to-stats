@@ -175,10 +175,10 @@ class Followers(models.Model):
                                    unique = True, 
                                    editable = False)
     
-    article_user_id_fk = models.ForeignKey(to = User, 
-                                           null = True, 
-                                           blank = True, 
-                                           on_delete = models.SET_NULL)
+    user_id_fk = models.ForeignKey(to = User, 
+                                   null = True, 
+                                   blank = True, 
+                                   on_delete = models.SET_NULL)
    
     change = models.IntegerField(null = False,
                                  blank = False,
