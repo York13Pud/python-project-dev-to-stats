@@ -1,9 +1,9 @@
 # --- Import required modules and libraries:
 from inspect import stack
 
+from ..models import Articles, ArticleComments, ArticleLikes, ArticleViews, Followers, Tags
 
-from ..models import Articles, ArticleComments, ArticleLikes, ArticleViews, Tags
-
+from ...users.models import User
 
 def get_all_tags():
     """_summary_
@@ -303,3 +303,56 @@ def add_article(article, user_id:int):
                                article_comments = article_details["comments_count"])
                 
     return f"Article \"{article.title}\" added successfully"
+
+
+def get_last_follower_count(user_id: int):
+    """_summary_
+    Collects the last follower count record from the Followers table / model.
+    
+    Returns:
+        list: all tags in the tags table.
+    """
+
+    try:
+        # --- Get all of the tag names:
+        last_known = Followers.objects.all().filter(user_id_fk = user_id)\
+                              .latest('date_added')
+    
+    except Followers.DoesNotExist:
+        last_known = int(0)
+        return last_known
+    
+    except Exception as error_message:
+        # # # # Change this to a log entry:
+        return error_message
+    
+    else:
+        return last_known.count
+    
+
+def add_followers_count(user_id, change: int, count: int):
+    """_summary_
+    This function will take the name of a tag and add it to the Tags table in the database.
+    
+    Args:
+        tag_to_add (str): The tag that needs to be added.
+
+    Returns:
+        String: Either an error is returned or an added tag message is returned.
+    """
+    
+    try:    
+        # --- Add an entry to the table:
+        user = User.objects.get(id = user_id)
+        new_count = Followers.objects.create(user_id_fk = user,
+                                             change = change, 
+                                             count = count)
+        
+    except Exception as error_message:
+        # # # # Change this to a log entry:
+        print(error_message)
+        return error_message
+    
+    else:    
+        # # # # Change this to a log entry:
+        return f"Added follower count"
