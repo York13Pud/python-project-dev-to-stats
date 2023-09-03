@@ -141,3 +141,6 @@ development_docs/.$003-db-design.drawio.bkp
 project/test.csv
 development_docs/.$004-data-processing-flow.drawio.bkp
 .$0*
+
+# Ignore migrations folders
+migrations/
